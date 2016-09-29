@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Gorillaz-Unofficial - 100% Unoffical 100% Gorillaz</title>
+    <link rel="icon" type="image/x-icon" href="fav.png" />
+
+    <!--<link href="Content/bootstrap.min.css" rel="stylesheet" />-->
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <link rel="stylesheet" href="Content/style.min.css" />
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="nav">
+            <div id="title">Gorillaz-Unofficial</div>
+            <div class="center" id="control">
+                <button class="btn btn-primary" href="#">Enter</button> <button class="btn btn-primary" onclick="toggleModal('modal-disclaimer');">Disclaimer</button>
+            </div>
+        </nav>
+        <section id="disclaimer">
+            <!-- The Modal -->
+            <div id="modal-disclaimer" class="w3-modal">
+                <div class="w3-modal-content w3-animate-zoom">
+                    <header class="w3-container w3-theme">
+                        <span onclick="toggleModal('modal-disclaimer');"
+                              class="w3-closebtn">&times;</span>
+                        <h2>Disclaimer</h2>
+                    </header>
+                    <div class="w3-container">
+                        <p>
+                            All Gorillaz artwork and official statements, stories and music is copyright &copy; Warner Music Group.
+                            All articles are owned by the authors of the articles and / or the magazines in which they were published.
+                            This site is not affiliated with, or endorsed by Warner Music Group in any way. 
+                            
+                        </p>
+                        <p>
+                            If you own the copyright to any text or images that appears on this site (Gorillaz or otherwise) and you would like them removed, please contact us and we will comply as soon as possible.
+                        </p>
+                        <p>
+                            This is a not-for-profit unofficial site for fans of Gorillaz.
+                            All lyrics, articles, tabs and artwork that appears here are for private educational and scholarly use only and must not be used for commercial purposes.
+                        </p>
+                    </div>
+                    <footer class="w3-container w3-theme">
+                        <p>
+                            <button class="w3-btn w3-theme-light" href="#">Contact</button>
+                        </p>
+                    </footer>
+                </div>
+            </div>
+            
+        </section>
+    </div>
+
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script src="Scripts/script.js"></script>
+</body>
+</html>
