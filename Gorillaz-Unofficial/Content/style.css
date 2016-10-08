@@ -1,4 +1,6 @@
-﻿/* W3 Theme #333 */
+﻿@import url('../fonts/stylesheet.css');
+
+/* W3 Theme #333 */
 .w3-theme-l5 {color:#000 !important; background-color:#f3f3f3 !important}
 .w3-theme-l4 {color:#000 !important; background-color:#d6d6d6 !important}
 .w3-theme-l3 {color:#000 !important; background-color:#adadad !important}
