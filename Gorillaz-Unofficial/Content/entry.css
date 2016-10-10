@@ -1,0 +1,61 @@
+﻿body {
+    background: url("../Images/Gorillaz.jpg") no-repeat bottom center;
+            background-size: contain;
+    -webkit-background-size: contain;
+       -moz-background-size: contain;
+         -o-background-size: contain;
+}
+
+.nav {
+    display: table;
+    margin: auto;
+}
+.w3-btn {
+    text-transform: uppercase;
+}
+.btn {
+    padding: 8px;
+    text-decoration: none;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.btn.btn-primary {
+    color: #333;
+    border: 1px solid #333;
+    background-color: transparent;
+}
+.btn.btn-primary:hover {
+    color: rgb(218,214,167);
+    background-color: #333;
+}
+
+#title {
+    font-family: Gorillaz1;
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    body {
+        background: url("../Images/Gorillaz_Cover.jpg") no-repeat center center;
+        background-size: cover;
+-webkit-background-size: cover;
+   -moz-background-size: cover;
+     -o-background-size: cover;
+    } 
+    .wrapper {
+        position: absolute;
+        top: 50%;
+        right: 50%;
+    }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+}

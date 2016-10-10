@@ -3,4 +3,4 @@
  * Gorillaz Unoffical (http://gorillaz-unofficial.com/)
  * Copyright 2016 Michaelletcher.com.
  */
-html,body{width:100%;height:100%;background-color:#dad6a7;margin:0;padding:0}body{background:url("../Images/Gorillaz.jpg") no-repeat bottom center;background-size:contain;-webkit-background-size:contain;-moz-background-size:contain;-o-background-size:contain}.wrapper{color:#333}.nav{display:table;margin:auto}.w3-btn{text-transform:uppercase}.btn{padding:8px;text-decoration:none;text-transform:uppercase;cursor:pointer}.btn.btn-primary{color:#333;border:1px solid #333;background-color:transparent}.btn.btn-primary:hover{color:#dad6a7;background-color:#333}#title{font-family:Gorillaz1;font-size:42px;margin-bottom:10px}@media(min-width:768px){body{background:url("../Images/Gorillaz_Cover.jpg") no-repeat center center;background-size:cover;-webkit-background-size:cover;-moz-background-size:cover;-o-background-size:cover}.wrapper{position:absolute;top:50%;right:50%}}
+html,body{width:100%;height:100%;background-color:#dad6a7;margin:0;padding:0}body{font-family:"Lato",sans-serif}.w3-content{max-width:2000px;margin-top:46px}.mySlides{display:none}

@@ -112,11 +112,18 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.paper.css" />
+    <Content Include="Content\bootstrap.paper.min.css" />
+    <Content Include="Content\entry.css" />
+    <Content Include="Content\entry.min.css">
+      <DependentUpon>entry.css</DependentUpon>
+    </Content>
     <Content Include="Content\style.min.css">
       <DependentUpon>style.css</DependentUpon>
     </Content>
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="home.html" />
     <Content Include="packages.config" />
     <Content Include="fonts\Gorillaz1.eot" />
     <Content Include="fonts\Gorillaz1.ttf" />
@@ -126,6 +133,7 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="bundleconfig.json" />
