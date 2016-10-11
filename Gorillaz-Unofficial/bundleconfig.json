@@ -10,5 +10,11 @@
     "inputFiles": [
       "Content/style.css"
     ]
+  },
+  {
+    "outputFileName": "Content/entry.min.css",
+    "inputFiles": [
+      "Content/entry.css"
+    ]
   }
 ]
