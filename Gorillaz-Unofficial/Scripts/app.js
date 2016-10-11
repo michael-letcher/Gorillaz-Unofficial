@@ -1,1 +1,1 @@
-﻿var app = angular.
+﻿var app = angular.module('GorillazApp', []);

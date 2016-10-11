@@ -118,12 +118,22 @@
     <Content Include="Content\entry.min.css">
       <DependentUpon>entry.css</DependentUpon>
     </Content>
+    <Content Include="Content\full-slider.css" />
+    <Content Include="Content\full-slider.min.css">
+      <DependentUpon>full-slider.css</DependentUpon>
+    </Content>
     <Content Include="Content\style.min.css">
       <DependentUpon>style.css</DependentUpon>
     </Content>
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="home.html" />
+    <Content Include="home.min.html">
+      <DependentUpon>home.html</DependentUpon>
+    </Content>
+    <Content Include="Images\Gorillaz_01.png" />
+    <Content Include="Images\Gorillaz_02.jpg" />
+    <Content Include="Images\Gorillaz_03.jpg" />
     <Content Include="packages.config" />
     <Content Include="fonts\Gorillaz1.eot" />
     <Content Include="fonts\Gorillaz1.ttf" />
@@ -138,6 +148,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="bundleconfig.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Controllers\homeController.js" />
     <Content Include="Scripts\holder.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -180,7 +191,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

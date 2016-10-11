@@ -16,5 +16,17 @@
     "inputFiles": [
       "Content/entry.css"
     ]
+  },
+  {
+    "outputFileName": "Content/full-slider.min.css",
+    "inputFiles": [
+      "Content/full-slider.css"
+    ]
+  },
+  {
+    "outputFileName": "home.min.html",
+    "inputFiles": [
+      "home.html"
+    ]
   }
 ]

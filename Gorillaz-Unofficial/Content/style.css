@@ -9,7 +9,26 @@ body {
     font-family: "Lato", sans-serif;
 }
 
+/* Typography */
+.title {
+    text-transform: uppercase;
+}
+
+/* Navigation */
+.navbar-brand {
+    font-family: Gorillaz1;
+}
+.nav li a {
+    font-family: Lato, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-transform: uppercase;
+}
+
 /* Slider */
-#home-carousel img {
-    
+.carousel-inner .fill {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.carousel-caption {
+    color: white;
 }
