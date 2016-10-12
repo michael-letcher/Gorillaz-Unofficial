@@ -13,4 +13,15 @@
             isActive: ''
         }
     ];
+
+    $scope.members = [
+        {
+            name: 'Murdoc',
+            imageURL: 'Images/Murdoc.jpg'
+        },
+        {
+            name: '2-D',
+            imageURL: 'Images/2D.jpg'
+        }
+    ];
 });

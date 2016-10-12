@@ -131,9 +131,14 @@
     <Content Include="home.min.html">
       <DependentUpon>home.html</DependentUpon>
     </Content>
+    <Content Include="Images\2D.jpg" />
+    <Content Include="Images\Cyborg_Noodle.jpg" />
     <Content Include="Images\Gorillaz_01.png" />
     <Content Include="Images\Gorillaz_02.jpg" />
     <Content Include="Images\Gorillaz_03.jpg" />
+    <Content Include="Images\Murdoc.jpg" />
+    <Content Include="Images\Noodle.jpg" />
+    <Content Include="Images\Russel.jpg" />
     <Content Include="packages.config" />
     <Content Include="fonts\Gorillaz1.eot" />
     <Content Include="fonts\Gorillaz1.ttf" />

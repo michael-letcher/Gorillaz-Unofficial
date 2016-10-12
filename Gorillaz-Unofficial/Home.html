@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="Content/style.min.css" />
     <link rel="stylesheet" href="Content/full-slider.min.css" />
 </head>
-<body>
+<body data-ng-controller="homeController">
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
@@ -46,7 +46,7 @@
     </nav>
     
     <!-- Home Section -->
-    <div id="home-carousel" class="carousel slide" data-ride="carousel" data-ng-controller="homeController">
+    <div id="home-carousel" class="carousel slide" data-ride="carousel">
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
             <div class="carousel-caption">
@@ -63,10 +63,15 @@
         <div class="row">
             <div class="col-sm-12">
                 <h1 class="title text-center">The Band</h1>
-                <div class="col-sm-12 col-md-6 col-lg-3">
-                    <img src="http://placehold.it/100x200&amp;text=Band Member" />
+                <div class="col-xs-12 col-sm-6 col-md-3 member" data-ng-repeat="member in members" ><!--style="background-image:url('{{member.imageURL}}')"-->
+                    <div class="img-wrapper">
+                        <h2 cl`ass="img-text">{{member.name}}</h2>
+                        <div class="cover"></div>
+                        <img src="{{member.imageURL}}" />
+                    </div>
                 </div>
             </div>
+        </div>
     </div>
     <!--<div class="wrapper">
         <iframe src="http://www.livejournal.com/users/gorillaz_news#newssite"></iframe>
