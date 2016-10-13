@@ -8,6 +8,14 @@
 body {
     font-family: "Lato", sans-serif;
 }
+.container-wrapper {
+    min-height: 93%;
+}
+#band-location ,
+#discography-location {
+    position: relative;
+    top: -64px;
+}
 
 /* Typography */
 .title {
@@ -34,24 +42,32 @@ body {
 }
 
 /* Band */
-.member {
+#band-wrapper {
+    background-color: antiquewhite;
+}
+.member-outer-wrapper {
     padding-bottom: 10px;
 }
-.img-wrapper {
-    position: relative;
+.member-inner-wrapper {
     display: table; /*forces divs width to the content within */
+    position: relative;
     margin: auto;
     overflow: hidden;
 }
-.img-wrapper h2, .img-wrapper div {
-    position:absolute;
-    top:-100%;
-    width: 100%;
-    -webkit-transition: top 0.5s; /* Safari */
-    transition: top 0.5s;
+.member-inner-wrapper > img {
+    max-height: 302px;
+    max-width: 236px;
 }
-.img-wrapper:hover h2, .img-wrapper:hover div {
-    top:0;
+.member-inner-wrapper h2, .member-inner-wrapper div {
+    position:absolute;
+    top: 0;
+    width: 100%;
+    opacity: 0;
+    -webkit-transition: opacity 0.5s; /* Safari */
+    transition: opacity 0.5s;
+}
+.member-inner-wrapper:hover h2, .member-inner-wrapper:hover div {
+    opacity: 1;
 }
 .img-text {
     z-index: 10;
