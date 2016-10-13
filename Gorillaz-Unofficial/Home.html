@@ -37,8 +37,8 @@
                     <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
                     <li><a href="#news">News <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
                     <li><a href="#">Forums <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
-                    <li><a href="#band">Band</a></li>
-                    <li><a href="#discography">Discography</a></li>
+                    <li><a href="#band-location">Band</a></li>
+                    <li><a href="#discography-location">Discography</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -48,10 +48,7 @@
     <!-- Home Section -->
     <div id="home-carousel" class="carousel slide" data-ride="carousel">
         <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-            <div class="carousel-caption">
-                TEST
-            </div>
+        <div class="carousel-inner" role="listbox" data-ng-cloak>
             <div class="item {{x.isActive}}" data-ng-repeat="x in slides">
                 <div class="fill" style="background-image:url('{{x.imageURL}}');"></div>
             </div>
@@ -59,20 +56,44 @@
     </div>
 
     <!-- Band Section -->
-    <div id="band" class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <h1 class="title text-center">The Band</h1>
-                <div class="col-xs-12 col-sm-6 col-md-3 member" data-ng-repeat="member in members" ><!--style="background-image:url('{{member.imageURL}}')"-->
-                    <div class="img-wrapper">
-                        <h2 cl`ass="img-text">{{member.name}}</h2>
-                        <div class="cover"></div>
-                        <img src="{{member.imageURL}}" />
+    <div id="band-location"></div>
+    <div id="band-wrapper" class="container-wrapper">
+        <div id="band" class="container" data-ng-cloak>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="title text-center">The Band</h1>
+                    <div class="col-xs-12 col-sm-4 member-outer-wrapper" data-ng-repeat="member in members" >
+                        <div class="member-inner-wrapper">
+                            <h2 class="img-text">{{member.name}}</h2>
+                            <div class="cover"></div>
+                            <img data-ng-src="{{member.imageURL}}" />
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Discography Section -->
+    <div id="discography-location"></div>
+    <div id="discography-wrapper" class="container-wrapper">
+        <div id="discography" class="container" data-ng-cloak>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="title text-center">Discography</h1>
+                    <h4 class="title">Studio Albums</h4>
+                    <div class="col-xs-12 col-sm-4 member-outer-wrapper" data-ng-repeat="album in studioAlbums">
+                        <div class="member-inner-wrapper">
+                            <h2 class="img-text">{{member.name}}</h2>
+                            <div class="cover"></div>
+                            <img data-ng-src="{{member.imageURL}}" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--<div class="wrapper">
         <iframe src="http://www.livejournal.com/users/gorillaz_news#newssite"></iframe>
     </div>-->
@@ -80,6 +101,7 @@
     <script src="Scripts/jquery-1.10.2.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-route.min.js"></script>
     <script src="Scripts/app.js"></script>
     <script src="Scripts/Controllers/homeController.js"></script>
     <script src="Scripts/script.js"></script>
