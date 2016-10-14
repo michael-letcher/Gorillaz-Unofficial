@@ -1,4 +1,4 @@
-﻿var app = angular.module('GorillazApp', ["ngRoute"]);
+﻿var app = angular.module('GorillazApp', ['ngRoute', 'firebase']);
 
 app.config(function ($routeProvider) {
     $routeProvider

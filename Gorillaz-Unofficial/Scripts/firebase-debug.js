@@ -1,4 +1,4 @@
-/*! @license Firebase v2.1.0 - License: https://www.firebase.com/terms/terms-of-service.html */ var CLOSURE_NO_DEPS = true; var COMPILED = false;
+/*! @license Firebase v2.1.2 - License: https://www.firebase.com/terms/terms-of-service.html */ var CLOSURE_NO_DEPS = true; var COMPILED = false;
 var goog = goog || {};
 goog.global = this;
 goog.global.CLOSURE_UNCOMPILED_DEFINES;
@@ -2959,6 +2959,8 @@ fb.core.util.exceptionGuard = function(fn) {
     fn();
   } catch (e) {
     setTimeout(function() {
+      var stack = e.stack || "";
+      fb.core.util.warn("Exception was thrown by user callback.", stack);
       throw e;
     }, Math.floor(0));
   }
@@ -4200,6 +4202,9 @@ fb.core.view.QueryParams.prototype.getQueryObject = function() {
 fb.core.view.QueryParams.prototype.loadsAllData = function() {
   return!(this.startSet_ || this.endSet_ || this.limitSet_);
 };
+fb.core.view.QueryParams.prototype.isDefault = function() {
+  return this.loadsAllData() && this.index_ == fb.core.snap.PriorityIndex;
+};
 fb.core.view.QueryParams.prototype.getNodeFilter = function() {
   if (this.loadsAllData()) {
     return new fb.core.view.filter.IndexedFilter(this.getIndex());
@@ -4211,7 +4216,12 @@ fb.core.view.QueryParams.prototype.getNodeFilter = function() {
     }
   }
 };
-goog.provide("fb.api.Query");
+if (goog.DEBUG) {
+  fb.core.view.QueryParams.prototype.toString = function() {
+    return fb.util.json.stringify(this.getQueryObject());
+  };
+}
+;goog.provide("fb.api.Query");
 goog.require("fb.core.snap.Index");
 goog.require("fb.core.util");
 goog.require("fb.core.util.validation");
@@ -5247,11 +5257,7 @@ fb.core.snap.LeafNode.prototype.equals = function(other) {
 };
 if (goog.DEBUG) {
   fb.core.snap.LeafNode.prototype.toString = function() {
-    if (typeof this.value_ === "string") {
-      return(this.value_);
-    } else {
-      return'"' + this.value_ + '"';
-    }
+    return fb.util.json.stringify(this.val(true));
   };
 }
 ;goog.provide("fb.core.snap.IndexMap");
@@ -5630,18 +5636,7 @@ fb.core.snap.ChildrenNode.prototype.resolveIndex_ = function(indexDefinition) {
 };
 if (goog.DEBUG) {
   fb.core.snap.ChildrenNode.prototype.toString = function() {
-    var s = "{";
-    var first = true;
-    this.forEachChild(fb.core.snap.PriorityIndex, function(key, value) {
-      if (first) {
-        first = false;
-      } else {
-        s += ", ";
-      }
-      s += '"' + key + '" : ' + value.toString();
-    });
-    s += "}";
-    return s;
+    return fb.util.json.stringify(this.val(true));
   };
 }
 ;goog.provide("fb.core.snap");
@@ -8389,6 +8384,9 @@ fb.login.transports.util.getBaseUrl = function() {
   var parsedUrl = fb.core.util.parseURL(fb.login.Constants.SERVER_HOST);
   return parsedUrl.scheme + "://" + parsedUrl.host + "/" + fb.login.Constants.API_VERSION;
 };
+fb.login.transports.util.getPopupChannelUrl = function(namespace) {
+  return fb.login.transports.util.getBaseUrl() + "/" + namespace + fb.login.Constants.POPUP_PATH_TO_CHANNEL;
+};
 goog.provide("fb.login.util.environment");
 fb.login.util.environment.isMobileWrapper = function() {
   return fb.login.util.environment.isMobileCordova() || fb.login.util.environment.isMobileWindows() || fb.login.util.environment.isIosWebview();
@@ -8438,8 +8436,7 @@ goog.require("fb.login.Transport");
 goog.require("fb.login.transports.util");
 goog.require("fb.login.util.environment");
 goog.require("fb.util.json");
-fb.login.transports.XHR = function(opt_Options) {
-  var options = opt_Options || {};
+fb.login.transports.XHR = function(options) {
   if (!options["method"]) {
     options["method"] = "GET";
   }
@@ -8518,10 +8515,9 @@ goog.require("fb.login.transports.XHR");
 goog.require("fb.login.transports.util");
 goog.require("fb.login.util.environment");
 goog.require("fb.util.json");
-fb.login.transports.CordovaInAppBrowser = function(opt_Options) {
-  var options = opt_Options || {};
+fb.login.transports.CordovaInAppBrowser = function(options) {
   this.requestId_ = goog.string.getRandomString() + goog.string.getRandomString() + goog.string.getRandomString();
-  this.options_ = options || {};
+  this.options_ = options;
 };
 fb.login.transports.CordovaInAppBrowser.prototype.open = function(url, params, cb) {
   var self = this, parsedUrl = fb.core.util.parseURL(fb.login.Constants.SERVER_HOST), windowRef;
@@ -8576,8 +8572,7 @@ goog.require("fb.login.Transport");
 goog.require("fb.login.transports.util");
 goog.require("fb.login.util.environment");
 goog.require("fb.util.json");
-fb.login.transports.NodeHttp = function(opt_Options) {
-  var options = opt_Options || {};
+fb.login.transports.NodeHttp = function(options) {
   if (!options["method"]) {
     options["method"] = "GET";
   }
@@ -8653,21 +8648,20 @@ goog.require("fb.login.Transport");
 goog.require("fb.login.transports.util");
 goog.require("fb.login.util.environment");
 goog.require("fb.util.json");
-fb.login.transports.Popup = function(opt_Options) {
-  var options = opt_Options || {};
+fb.login.transports.Popup = function(options) {
   if (!options["window_features"] || fb.login.util.environment.isMobileFirefox()) {
     options["window_features"] = undefined;
   }
   if (!options["window_name"]) {
     options["window_name"] = "_blank";
   }
-  if (!options["relay_url"]) {
-    options["relay_url"] = fb.login.transports.util.getBaseUrl() + fb.login.Constants.POPUP_PATH_TO_CHANNEL;
-  }
   this.options = options;
 };
 fb.login.transports.Popup.prototype.open = function(url, params, cb) {
   var self = this, isIE = fb.login.util.environment.isModernIE(), iframe, messageTarget;
+  if (!this.options["relay_url"]) {
+    return cb(new Error("invalid arguments: origin of url and relay_url must match"));
+  }
   var origin = fb.login.transports.util.extractOrigin(url);
   if (origin !== fb.login.transports.util.extractOrigin(self.options["relay_url"])) {
     if (cb) {
@@ -8763,8 +8757,7 @@ goog.require("fb.login.Errors");
 goog.require("fb.login.Transport");
 goog.require("fb.login.transports.util");
 goog.require("fb.util.json");
-fb.login.transports.JSONP = function(opt_Options) {
-  var options = opt_Options || {};
+fb.login.transports.JSONP = function(options) {
   if (!options["callback_parameter"]) {
     options["callback_parameter"] = "callback";
   }
@@ -8899,12 +8892,12 @@ goog.require("fb.constants");
 goog.require("fb.core.storage");
 goog.require("fb.login.Transport");
 goog.require("fb.login.transports.util");
-fb.login.transports.Redirect = function(opt_Options) {
-  var options = opt_Options || {};
+fb.login.transports.Redirect = function(options) {
   this.requestId_ = goog.string.getRandomString() + goog.string.getRandomString() + goog.string.getRandomString();
-  this.options_ = options || {};
+  this.options_ = options;
 };
 fb.login.transports.Redirect.prototype.open = function(url, params, cb) {
+  fb.core.storage.SessionStorage.set(fb.login.Constants.REDIR_REQUEST_ID_KEY, this.requestId_);
   fb.core.storage.SessionStorage.set(fb.login.Constants.REDIR_REQUEST_ID_KEY, this.requestId_);
   params["requestId"] = this.requestId_;
   params["redirectTo"] = params["redirectTo"] || window["location"]["href"];
@@ -9076,7 +9069,7 @@ fb.login.AuthenticationManager.prototype.authWithPopup = function(provider, opt_
     return;
   }
   requestInfo.transportOptions["window_features"] = "" + "menubar=yes," + "modal=yes," + "alwaysRaised=yes" + "location=yes," + "resizable=yes," + "scrollbars=yes," + "status=yes," + "height=" + height + "," + "width=" + width + "," + "top=" + (typeof screen === "object" ? (screen["height"] - height) * .5 : 0) + "," + "left=" + (typeof screen === "object" ? (screen["width"] - width) * .5 : 0);
-  requestInfo.transportOptions["relay_url"] = fb.login.transports.util.getBaseUrl() + "/" + this.repoInfo_.namespace + fb.login.Constants.POPUP_PATH_TO_CHANNEL;
+  requestInfo.transportOptions["relay_url"] = fb.login.transports.util.getPopupChannelUrl(this.repoInfo_.namespace);
   requestInfo.transportOptions["requestWithCredential"] = goog.bind(this.requestWithCredential, this);
   this.authWithTransports_(transports, "/auth/" + provider, requestInfo, opt_onComplete);
 };
@@ -9584,6 +9577,7 @@ fb.core.view.ViewProcessor.prototype.ackUserWrite_ = function(viewCache, ackPath
     var source = new fb.core.view.WriteTreeCompleteChildSource(writesCache, viewCache, optCompleteCache);
     var oldEventCache = viewCache.getEventCache().getNode();
     var newEventCache = oldEventCache;
+    var eventCacheComplete;
     if (viewCache.getServerCache().isFullyInitialized()) {
       if (ackPath.isEmpty()) {
         var update = (writesCache.calcCompleteEventCache(viewCache.getCompleteServerSnap()));
@@ -9602,6 +9596,7 @@ fb.core.view.ViewProcessor.prototype.ackUserWrite_ = function(viewCache, ackPath
           }
         }
       }
+      eventCacheComplete = true;
     } else {
       if (viewCache.getEventCache().isFullyInitialized()) {
         newEventCache = oldEventCache;
@@ -9616,18 +9611,23 @@ fb.core.view.ViewProcessor.prototype.ackUserWrite_ = function(viewCache, ackPath
             }
           });
         }
+        eventCacheComplete = true;
       } else {
-        fb.core.util.assert(!ackPath.isEmpty(), "If it were an empty path, we would have an event snap");
-        var childKey = ackPath.getFront();
-        if (ackPath.getLength() == 1 || viewCache.getEventCache().isCompleteForChild(childKey)) {
-          var completeChild = writesCache.calcCompleteChild(childKey, viewCache.getServerCache());
-          if (completeChild != null) {
-            newEventCache = this.filter_.updateChild(oldEventCache, childKey, completeChild, source, accumulator);
+        if (ackPath.isEmpty()) {
+          eventCacheComplete = false;
+        } else {
+          var childKey = ackPath.getFront();
+          if (ackPath.getLength() == 1 || viewCache.getEventCache().isCompleteForChild(childKey)) {
+            var completeChild = writesCache.calcCompleteChild(childKey, viewCache.getServerCache());
+            if (completeChild != null) {
+              newEventCache = this.filter_.updateChild(oldEventCache, childKey, completeChild, source, accumulator);
+            }
           }
+          eventCacheComplete = false;
         }
       }
     }
-    return viewCache.updateEventSnap(newEventCache, viewCache.getEventCache().isFullyInitialized() || ackPath.isEmpty(), this.filter_.filtersNodes());
+    return viewCache.updateEventSnap(newEventCache, eventCacheComplete, this.filter_.filtersNodes());
   }
 };
 fb.core.view.ViewProcessor.prototype.revertUserWrite_ = function(viewCache, path, writesCache, optCompleteServerCache, accumulator) {
@@ -10056,7 +10056,17 @@ fb.core.util.ImmutableTree.prototype.foreachChild = function(f) {
     }
   });
 };
-goog.provide("fb.core.SyncPoint");
+if (goog.DEBUG) {
+  fb.core.util.ImmutableTree.prototype.toString = function() {
+    var json = {};
+    this.foreach(function(relativePath, value) {
+      var pathString = relativePath.toString();
+      json[pathString] = value.toString();
+    });
+    return fb.util.json.stringify(json);
+  };
+}
+;goog.provide("fb.core.SyncPoint");
 goog.require("fb.core.util.ImmutableTree");
 goog.require("fb.core.view.ViewCache");
 goog.require("fb.core.view.EventRegistration");
@@ -10312,53 +10322,42 @@ fb.core.WriteTree.prototype.removeWrite = function(writeId) {
     return s.writeId === writeId;
   });
   fb.core.util.assert(idx >= 0, "removeWrite called with nonexistent writeId.");
-  var writeRecord = this.allWrites_[idx];
+  var writeToRemove = this.allWrites_[idx];
   this.allWrites_.splice(idx, 1);
-  var foundShadow = false;
-  var foundChildWrites = false;
-  var foundUnderlyingWrites = false;
+  var removedWriteWasVisible = writeToRemove.visible;
+  var removedWriteOverlapsWithOtherWrites = false;
   var i = this.allWrites_.length - 1;
-  while (!foundShadow && i >= 0) {
-    var remainingRecord = this.allWrites_[i];
-    if (i >= idx && this.recordContainsPath_(remainingRecord, writeRecord.path)) {
-      foundShadow = true;
-    } else {
-      if (!foundChildWrites && writeRecord.path.contains(remainingRecord.path)) {
-        if (i >= idx) {
-          foundChildWrites = true;
-        } else {
-          foundUnderlyingWrites = true;
+  while (removedWriteWasVisible && i >= 0) {
+    var currentWrite = this.allWrites_[i];
+    if (currentWrite.visible) {
+      if (i >= idx && this.recordContainsPath_(currentWrite, writeToRemove.path)) {
+        removedWriteWasVisible = false;
+      } else {
+        if (writeToRemove.path.contains(currentWrite.path)) {
+          removedWriteOverlapsWithOtherWrites = true;
         }
       }
     }
     i--;
   }
-  if (!foundShadow) {
-    if (foundChildWrites || foundUnderlyingWrites) {
+  if (!removedWriteWasVisible) {
+    return null;
+  } else {
+    if (removedWriteOverlapsWithOtherWrites) {
       this.resetTree_();
+      return writeToRemove.path;
     } else {
-      if (writeRecord.snap) {
-        this.visibleWrites_ = this.visibleWrites_.removeWrite(writeRecord.path);
+      if (writeToRemove.snap) {
+        this.visibleWrites_ = this.visibleWrites_.removeWrite(writeToRemove.path);
       } else {
-        var children = writeRecord.children;
+        var children = writeToRemove.children;
         var self = this;
         goog.object.forEach(children, function(childSnap, childName) {
-          self.visibleWrites_ = self.visibleWrites_.removeWrite(writeRecord.path.child(childName));
+          self.visibleWrites_ = self.visibleWrites_.removeWrite(writeToRemove.path.child(childName));
         });
       }
+      return writeToRemove.path;
     }
-  }
-  var path = writeRecord.path;
-  var hasShadow = this.visibleWrites_.hasCompleteWrite(path);
-  if (hasShadow) {
-    if (foundUnderlyingWrites) {
-      return path;
-    } else {
-      fb.core.util.assert(foundShadow, "Must have found a shadow");
-      return null;
-    }
-  } else {
-    return path;
   }
 };
 fb.core.WriteTree.prototype.getCompleteWriteData = function(path) {
@@ -10540,8 +10539,8 @@ fb.core.WriteTree.layerTree_ = function(writes, filter, treeRoot) {
               if (relativePath.isEmpty()) {
                 compoundWrite = compoundWrite.addWrites(fb.core.util.Path.Empty, write.children);
               } else {
-                var child = write.children[relativePath.getFront()];
-                if (child !== null) {
+                var child = fb.util.obj.get(write.children, relativePath.getFront());
+                if (child) {
                   var deepNode = child.getChild(relativePath.popFront());
                   compoundWrite = compoundWrite.addWrite(fb.core.util.Path.Empty, deepNode);
                 }
@@ -10596,7 +10595,12 @@ fb.core.operation.Overwrite.prototype.operationForChild = function(childName) {
     return new fb.core.operation.Overwrite(this.source, this.path.popFront(), this.snap);
   }
 };
-goog.provide("fb.core.operation.AckUserWrite");
+if (goog.DEBUG) {
+  fb.core.operation.Overwrite.prototype.toString = function() {
+    return "Operation(" + this.path + ": " + this.source.toString() + " overwrite: " + this.snap.toString() + ")";
+  };
+}
+;goog.provide("fb.core.operation.AckUserWrite");
 fb.core.operation.AckUserWrite = function(path, revert) {
   this.type = fb.core.OperationType.ACK_USER_WRITE;
   this.source = fb.core.OperationSource.User;
@@ -10610,7 +10614,12 @@ fb.core.operation.AckUserWrite.prototype.operationForChild = function(childName)
     return this;
   }
 };
-goog.provide("fb.core.operation.ListenComplete");
+if (goog.DEBUG) {
+  fb.core.operation.AckUserWrite.prototype.toString = function() {
+    return "Operation(" + this.path + ": " + this.source.toString() + " ack write revert=" + this.revert + ")";
+  };
+}
+;goog.provide("fb.core.operation.ListenComplete");
 fb.core.operation.ListenComplete = function(source, path) {
   this.type = fb.core.OperationType.LISTEN_COMPLETE;
   this.source = source;
@@ -10623,7 +10632,12 @@ fb.core.operation.ListenComplete.prototype.operationForChild = function(childNam
     return new fb.core.operation.ListenComplete(this.source, this.path.popFront());
   }
 };
-goog.provide("fb.core.operation.Merge");
+if (goog.DEBUG) {
+  fb.core.operation.ListenComplete.prototype.toString = function() {
+    return "Operation(" + this.path + ": " + this.source.toString() + " listen_complete)";
+  };
+}
+;goog.provide("fb.core.operation.Merge");
 fb.core.operation.Merge = function(source, path, children) {
   this.type = fb.core.OperationType.MERGE;
   this.source = source;
@@ -10647,7 +10661,12 @@ fb.core.operation.Merge.prototype.operationForChild = function(childName) {
     return new fb.core.operation.Merge(this.source, this.path.popFront(), this.children);
   }
 };
-goog.provide("fb.core.Operation");
+if (goog.DEBUG) {
+  fb.core.operation.Merge.prototype.toString = function() {
+    return "Operation(" + this.path + ": " + this.source.toString() + " merge: " + this.children.toString() + ")";
+  };
+}
+;goog.provide("fb.core.Operation");
 goog.require("fb.core.operation.AckUserWrite");
 goog.require("fb.core.operation.Merge");
 goog.require("fb.core.operation.Overwrite");
@@ -10671,7 +10690,12 @@ fb.core.OperationSource.Server = new fb.core.OperationSource(false, true, null, 
 fb.core.OperationSource.forServerTaggedQuery = function(queryId) {
   return new fb.core.OperationSource(false, true, queryId, true);
 };
-goog.provide("fb.core.SyncTree");
+if (goog.DEBUG) {
+  fb.core.OperationSource.prototype.toString = function() {
+    return this.fromUser ? "user" : this.tagged ? "server(queryID=" + this.queryId + ")" : "server";
+  };
+}
+;goog.provide("fb.core.SyncTree");
 goog.require("fb.core.Operation");
 goog.require("fb.core.SyncPoint");
 goog.require("fb.core.WriteTree");
@@ -12287,4 +12311,4 @@ Firebase.SDK_VERSION = CLIENT_VERSION;
 Firebase.INTERNAL = fb.api.INTERNAL;
 Firebase.Context = fb.core.RepoManager;
 Firebase.TEST_ACCESS = fb.api.TEST_ACCESS;
-; Firebase.SDK_VERSION='2.1.0';
+; Firebase.SDK_VERSION='2.1.2';
