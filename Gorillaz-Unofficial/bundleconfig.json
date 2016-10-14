@@ -28,5 +28,11 @@
     "inputFiles": [
       "home.html"
     ]
+  },
+  {
+    "outputFileName": "Scripts/firebase.min.js",
+    "inputFiles": [
+      "Scripts/firebase.js"
+    ]
   }
 ]
