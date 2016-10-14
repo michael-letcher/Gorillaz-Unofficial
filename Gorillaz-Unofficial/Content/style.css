@@ -9,12 +9,12 @@ body {
     font-family: "Lato", sans-serif;
 }
 .container-wrapper {
-    min-height: 93%;
+    min-height: 95%;
 }
 #band-location ,
 #discography-location {
     position: relative;
-    top: -64px;
+    top: -60px;
 }
 
 /* Typography */
@@ -23,6 +23,10 @@ body {
 }
 
 /* Navigation */
+.navbar-white {
+    background-color: #fff;
+    color: rgba(0,0,0,.84);
+}
 .navbar-brand {
     font-family: Gorillaz1;
 }
