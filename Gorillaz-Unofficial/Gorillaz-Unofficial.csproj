@@ -110,6 +110,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-material-design.css" />
+    <Content Include="Content\bootstrap-material-design.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -124,15 +126,17 @@
     <Content Include="Content\full-slider.min.css">
       <DependentUpon>full-slider.css</DependentUpon>
     </Content>
+    <Content Include="Content\ripples.css" />
+    <Content Include="Content\ripples.min.css" />
     <Content Include="Content\style.min.css">
       <DependentUpon>style.css</DependentUpon>
     </Content>
     <Content Include="Controllers\bandController.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="home.html" />
+    <Content Include="index.html" />
     <Content Include="home.min.html">
-      <DependentUpon>home.html</DependentUpon>
+      <DependentUpon>index.html</DependentUpon>
     </Content>
     <Content Include="Images\2D.jpg" />
     <Content Include="Images\Cyborg_Noodle.jpg" />
@@ -170,18 +174,24 @@
     <Content Include="Controllers\homeController.js" />
     <Content Include="Scripts\firebase-debug.js" />
     <Content Include="Scripts\firebase.js" />
-    <Content Include="Scripts\holder.js" />
+    <Content Include="Content\ripples.css.map" />
+    <Content Include="Content\ripples.min.css.map" />
+    <Content Include="Content\bootstrap-material-design.css.map" />
+    <Content Include="Content\bootstrap-material-design.min.css.map" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
-    <Content Include="Scripts\jquery-3.1.1.slim.js" />
-    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
-    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Scripts\material.js" />
+    <Content Include="Scripts\material.min.js" />
+    <Content Include="Scripts\ripples.js" />
+    <Content Include="Scripts\ripples.min.js" />
     <Content Include="Scripts\script.js" />
     <Content Include="Scripts\script.min.js">
       <DependentUpon>script.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\material.min.js.map" />
+    <Content Include="Scripts\ripples.min.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -196,7 +206,7 @@
     <Content Include="fonts\stylesheet.css" />
     <Content Include="Images\Gorillaz.jpg" />
     <Content Include="Images\Gorillaz_Cover.jpg" />
-    <Content Include="index.html" />
+    <Content Include="entry.html" />
     <Content Include="Views\album.html" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -210,7 +220,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
