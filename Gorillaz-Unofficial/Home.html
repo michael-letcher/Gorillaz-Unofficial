@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="Content/style.min.css" />
     <link rel="stylesheet" href="Content/full-slider.min.css" />
 </head>
-<body data-ng-controller="homeController">
+<body>
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
@@ -46,18 +46,18 @@
     </nav>
     
     <!-- Home Section -->
-    <div id="home-carousel" class="carousel slide" data-ride="carousel">
+    <div data-ng-controller="homeController" id="home-carousel" class="carousel slide" data-ride="carousel">
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox" data-ng-cloak>
             <div class="item {{x.isActive}}" data-ng-repeat="x in slides">
                 <div class="fill" style="background-image:url('{{x.imageURL}}');"></div>
             </div>
         </div>
-    </div>
+    </divdata-ng-controller="homeController">
 
     <!-- Band Section -->
     <div id="band-location"></div>
-    <div id="band-wrapper" class="container-wrapper">
+    <div data-ng-controller="bandController" id="band-wrapper" class="container-wrapper">
         <div id="band" class="container" data-ng-cloak>
             <div class="row">
                 <div class="col-sm-12">
@@ -76,12 +76,13 @@
 
     <!-- Discography Section -->
     <div id="discography-location"></div>
-    <div id="discography-wrapper" class="container-wrapper">
+    <div data-ng-controller="albumController" id="discography-wrapper" class="container-wrapper">
         <div id="discography" class="container" data-ng-cloak>
             <div class="row">
                 <div class="col-sm-12">
                     <h1 class="title text-center">Discography</h1>
                     <h4 class="title">Studio Albums</h4>
+                    <div class="loading">Loading...</div>
                     <div class="col-xs-12 col-sm-4 member-outer-wrapper" data-ng-repeat="album in studioAlbums">
                         <div class="member-inner-wrapper">
                             <h2 class="img-text">{{member.name}}</h2>
@@ -105,7 +106,9 @@
     <script src="Scripts/firebase.js"></script>
     <script src="Scripts/angularfire.min.js"></script>
     <script src="Scripts/app.js"></script>
-    <script src="Scripts/Controllers/homeController.js"></script>
+    <script src="Controllers/homeController.js"></script>
+    <script src="Controllers/bandController.js"></script>
+    <script src="Controllers/albumController.js"></script>
     <script src="Scripts/script.js"></script>
     <script src="Scripts/holder.js"></script>
 </body>
