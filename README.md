@@ -3,13 +3,14 @@ Gorillaz Unofficial Website
 
 ## Stage 01
 * Looked respectably designed
-* A nicely formatted discography
 * A link to the forums (open in new window)
-* A link to the twitter / A 'latest tweets' panel 
-* A couple of other odd links like one to the old site as an archive)
+* A link to the twitter / A 'latest tweets' panel
+* Social Media links (require a list from group)
+* A couple of other odd links like one to the old site as an archive (require a list from group)
 
 ## Stage 02
-* Has a blog (Grav CMS / Wordpress)
+* Has a blog (Wordpress)
+* A nicely formatted discography
 * Photo galleries (offical and unoffical)
 
 ## Stage 03
