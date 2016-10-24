@@ -7,6 +7,8 @@
 
 body {
     font-family: "Lato", sans-serif;
+    color: white;
+    background-color: black;
 }
 .container-wrapper {
     min-height: 95%;
@@ -22,6 +24,10 @@ body {
         top: -60px;
     }
 }
+section:nth-child(even) {
+    background-color: white;
+    color: black;
+}
 
 /* Typography */
 .title {
@@ -32,6 +38,10 @@ body {
 .navbar-white {
     background-color: #fff;
     color: rgba(0,0,0,.84);
+}
+.navbar-black {
+    background-color: #000;
+    color: rgba(255,255,255,.84);
 }
 .navbar-brand {
     font-family: Gorillaz1;
@@ -53,7 +63,6 @@ body {
 
 /* Band */
 #band-wrapper {
-    background-color: white;
     min-height: 500px;
 }
 .member-outer-wrapper {
@@ -100,13 +109,12 @@ body {
 
 /* Discography */
 #discography-wrapper {
-    background-color: #eceff1;
     min-height: 500px;
 }
 
 /* Footer */
 footer {
-    background-color: darkred;
+    background-color: darkslategrey;
     color: white;
     margin: 0;
     padding: 50px 0;
