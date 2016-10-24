@@ -30,4 +30,9 @@
                 imagePhase4: 'Images/phase4/Russel.jpg'
             }
     ];
+    $scope.selectedMember;
+
+    $scope.bandModal = function (name) {
+        $scope.selectedMember;
+    }
 });
