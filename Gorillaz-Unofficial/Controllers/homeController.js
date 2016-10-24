@@ -1,15 +1,15 @@
 ﻿app.controller('homeController', function ($scope) {
     $scope.slides = [
         {
-            imageURL: 'Images/Gorillaz_01.png',
+            imageURL: 'Images/Cover_01.jpg',
             isActive: 'active'
         },
         {
-            imageURL: 'Images/Gorillaz_02.jpg',
+            imageURL: 'Images/Cover_02.jpg',
             isActive: ''
         },
         {
-            imageURL: 'Images/Gorillaz_03.jpg',
+            imageURL: 'Images/Cover_03.jpg',
             isActive: ''
         }
     ];

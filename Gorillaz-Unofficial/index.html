@@ -62,24 +62,22 @@
     <div data-ng-controller="bandController" id="band-wrapper" class="container-wrapper">
         <div id="band" class="container" data-ng-cloak>
             <div class="row">
-                <div class="col-sm-12">
-                    <h1 class="title">The Band</h1>
+                <h1 class="title">The Band</h1>
 
-                    <div class="btn-toolbar">
-                        <div class="btn-group">
-                            <a href="javascript:void(0)" class="btn">PHASE 1</a>
-                            <a href="javascript:void(0)" class="btn">PHASE 2</a>
-                            <a href="javascript:void(0)" class="btn">PHASE 3</a>
-                            <a href="javascript:void(0)" class="btn">PHASE 4</a>
-                        </div>
+                <div class="btn-toolbar">
+                    <div class="btn-group">
+                        <a class="btn" ng-class="phase == 1 ? 'active' : ''" data-ng-click="phase = 1">PHASE 1</a>
+                        <a class="btn" ng-class="phase == 2 ? 'active' : ''" data-ng-click="phase = 2">PHASE 2</a>
+                        <a class="btn" ng-class="phase == 3 ? 'active' : ''" data-ng-click="phase = 3">PHASE 3</a>
+                        <a class="btn" ng-class="phase == 4 ? 'active' : ''" data-ng-click="phase = 4">PHASE 4</a>
                     </div>
+                </div>
 
-                    <div class="col-xs-12 col-sm-4 member-outer-wrapper" data-ng-repeat="member in members">
-                        <div class="member-inner-wrapper">
-                            <h2 class="img-text">{{member.name}}</h2>
-                            <div class="cover"></div>
-                            <img data-ng-src="{{member.imagePhase1}}" />
-                        </div>
+                <div class="col-xs-12 col-sm-4 col-md-3 member-outer-wrapper" data-ng-repeat="member in members">
+                    <div class="member-inner-wrapper">
+                        <h2 class="img-text">{{member.name}}</h2>
+                        <div class="cover"></div>
+                        <img data-ng-src="{{phase == 1 && member.imagePhase1 || phase == 2 && member.imagePhase2 || phase == 3 && member.imagePhase3 || phase == 4 && member.imagePhase4}}" />
                     </div>
                 </div>
             </div>
