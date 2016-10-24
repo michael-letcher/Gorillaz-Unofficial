@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-    
+
     <link rel="stylesheet" href="Content/bootstrap.min.css" />
     <link rel="stylesheet" href="Content/ripples.min.css" />
     <link rel="stylesheet" href="Content/bootstrap-material-design.min.css" />
@@ -46,7 +46,7 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
     </nav>
-    
+
     <!-- Home Section -->
     <div data-ng-controller="homeController" id="home-carousel" class="carousel slide" data-ride="carousel">
         <!-- Wrapper for slides -->
@@ -124,53 +124,55 @@
             </div>
         </div>
     </section>
-
+    
     <!-- About Section -->
     <div id="about-location"></div>
-    <div id="about-wrapper">
+    <section id="about-wrapper">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <h1 class="title">About</h1>
                     <h4 class="title">Studio Albums</h4>
                     <div class="loading">Loading...</div>
-                    
+
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Contact Section -->
     <div id="contact-location"></div>
-    <div id="contact-wrapper">
+    <section id="contact-wrapper">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <h1 class="title">Contact</h1>
                     <h4 class="title">Studio Albums</h4>
                     <div class="loading">Loading...</div>
-                    
+
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="row">
-                <div class="footer-nav col-xs-12">
-                    <a href="#">Twitter</a>
-                    <a href="#">Disclaimer</a>
-                    <a href="#">Forums</a>
+                <div class="col-xs-12 col-md-6">
+                    <ul class="list-unstyled ">
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Disclaimer</a> </li>
+                        <li><a href="#">Forums</a></li>
+                    </ul>
+                    <p>Gorillaz-Unofficial ©2016</p>
+                    <p>
+                        Designed and built by <a href="http://michaelletcher.com" alt="MichaelLetcher Web Design">MichaelLetcher Web Design</a></span>
+                    </p>
                 </div>
-            </div>
-            <div class="row">
-                <p>
-                    <span class="col-xs-12">Gorillaz-Unofficial ©2016</span>
-                    <span class="col-xs-12">Designed and built by <a href="http://michaelletcher.com" alt="MichaelLetcher Web Design">MichaelLetcher Web Design</a></span>
-                </p>
-            </div>
+                <div class="col-xs-12 col-md-6">
+                    TWITTER
+                </div>
         </div>
     </footer>
 
@@ -184,7 +186,7 @@
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/material.min.js"></script>
     <script src="Scripts/ripples.min.js"></script>
-    
+
     <!-- Angular + Firebase -->
     <script src="Scripts/angular.min.js"></script>
     <script src="Scripts/angular-route.min.js"></script>
