@@ -76,33 +76,35 @@
                 <div class="col-xs-12 col-sm-4 col-md-3 member-outer-wrapper" data-ng-repeat="member in members">
                     <div class="member-inner-wrapper">
                         <h2 class="img-text">{{member.name}}</h2>
-                        <div class="cover" data-ng-click="bandModal(member.name)" data-toggle="modal" data-target="#band-modal"></div>
+                        <div class="cover" data-ng-click="bandModal(member.id)" data-toggle="modal" data-target="#band-modal"></div>
                         <img data-ng-src="{{phase == 1 && member.imagePhase1 || phase == 2 && member.imagePhase2 || phase == 3 && member.imagePhase3 || phase == 4 && member.imagePhase4}}" />
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Band Modal -->
-    <div id="band-modal" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Modal title</h4>
-                </div>
-                <div class="modal-body">
-                    <p></p>
-                    <p>One fine body…</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+        <!-- Band Modal -->
+        <div id="band-modal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">{{selectedMember.fullName}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Name: {{selectedMember.fullName}}</p>
+                        <p>Gender: {{selectedMember.gender}}</p>
+                        <p>Height: {{selectedMember.height}}</p>
+                        <p>D.O.B: {{selectedMember.dob}}</p>
+                        <p>Years Active: {{selectedMember.active}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Discography Section -->
     <div id="discography-location"></div>
@@ -173,6 +175,7 @@
                 <div class="col-xs-12 col-md-6">
                     TWITTER
                 </div>
+            </div>
         </div>
     </footer>
 
