@@ -36,12 +36,15 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="gorillaz-navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="#news">News <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+                    <li><a href="#">News <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
                     <li><a href="#">Forums <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
                     <li><a href="#band-location">Band</a></li>
                     <li><a href="#discography-location">Discography</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#about-location">About</a></li>
+                    <li><a href="#contact-location">Contact</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right visible-md-block">
+                    <li><a href="https://twitter.com/gorillaz_u"> <i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
@@ -51,6 +54,9 @@
     <div data-ng-controller="homeController" id="home-carousel" class="carousel slide" data-ride="carousel">
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox" data-ng-cloak>
+            <!--<div class="jumbotron carousel-caption">
+                Phase 4 is here
+            </div>-->
             <div class="item {{x.isActive}}" data-ng-repeat="x in slides">
                 <div class="fill" style="background-image:url('{{x.imageURL}}');"></div>
             </div>
@@ -106,6 +112,8 @@
         </div>
     </section>
 
+    <div class="parallax"></div>
+
     <!-- Discography Section -->
     <div id="discography-location"></div>
     <section data-ng-controller="albumController" id="discography-wrapper">
@@ -126,7 +134,9 @@
             </div>
         </div>
     </section>
-    
+
+    <div class="parallax"></div>
+
     <!-- About Section -->
     <div id="about-location"></div>
     <section id="about-wrapper">
@@ -134,13 +144,21 @@
             <div class="row">
                 <div class="col-sm-12">
                     <h1 class="title">About</h1>
-                    <h4 class="title">Studio Albums</h4>
-                    <div class="loading">Loading...</div>
-
+                    <h4 class="title">Quoted from Gorillaz Wiki (sorta)</h4>
+                    <p>Gorillaz-Unofficial is a online community focused on the virtual band Gorillaz and its collaborators.</p>
+                    <p>We feature news, history, interviews with people related to the project, a detailed discography, and biographies of the band, its members, creators and collaborators.</p>
+                    <p>We're known by people from Zombie Flesh Eaters, Passion Pictures and EMI. We've also been mentioned on Rise Of The Ogre.</p>
+                    <p>We were underatack from those stupid pirates looking for Murdoc in September 2014 which meant we had to go underground. However, as of December 30th 2015, we officially reactivated our broadcast of everything Gorillaz!</p>
+                    <h4 class="title">Recognition and statistics</h4>
+                    <p>
+                        Gorillaz-Unofficial.com has now been constantly updated since its launch in 2004 We have over tens of thousands of unique readers visiting the site each month now, and have received millions of visits since launch. We're lucky enough to count members of Zombie Flesh Eaters, Gorillaz' management, EMI, Passion Pictures and Gorillaz artistic teams amongst our regular visitors. Damon Albarn and Jamie Hewlett have both kindly granted interviews to the site in the past and have been very supportive.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
+
+    <div class="parallax"></div>
 
     <!-- Contact Section -->
     <div id="contact-location"></div>
@@ -149,9 +167,16 @@
             <div class="row">
                 <div class="col-sm-12">
                     <h1 class="title">Contact</h1>
-                    <h4 class="title">Studio Albums</h4>
-                    <div class="loading">Loading...</div>
-
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <h4 class="title">Form title</h4>
+                    <div>form...</div>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <a class="twitter-timeline" data-dnt="true" data-theme="light" data-height="500" href="https://twitter.com/gorillaz_u">Tweets by gorillaz_u</a>
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <a class="twitter-timeline" data-dnt="true" data-theme="light" data-height="500" href="https://twitter.com/gorillaz">Tweets by gorillaz</a>
                 </div>
             </div>
         </div>
@@ -161,19 +186,15 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-md-6">
-                    <ul class="list-unstyled ">
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Disclaimer</a> </li>
-                        <li><a href="#">Forums</a></li>
-                    </ul>
-                    <p>Gorillaz-Unofficial ©2016</p>
-                    <p>
-                        Designed and built by <a href="http://michaelletcher.com" alt="MichaelLetcher Web Design">MichaelLetcher Web Design</a></span>
-                    </p>
+                <div class="col-xs-12 text-center">
+                    <a href="javascript:void(0)" class="btn btn-sm btn-default">Copyright</a>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-default">Disclaimer</a>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-default">Credits</a>
                 </div>
-                <div class="col-xs-12 col-md-6">
-                    TWITTER
+                <div class="col-xs-12">
+                    <h6 class="text-center">
+                        Gorillaz-Unofficial ©2004-2016 | Designed and built by <a href="http://michaelletcher.com" alt="MichaelLetcher Web Design">MichaelLetcher Web Design</a></span>
+                    </h6>
                 </div>
             </div>
         </div>
@@ -202,5 +223,24 @@
     <script src="Controllers/albumController.js"></script>
 
     <script src="Scripts/script.js"></script>
+
+    <script>
+        window.twttr = (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+          if (d.getElementById(id)) return t;
+          js = d.createElement(s);
+          js.id = id;
+          js.src = "https://platform.twitter.com/widgets.js";
+          fjs.parentNode.insertBefore(js, fjs);
+
+          t._e = [];
+          t.ready = function(f) {
+            t._e.push(f);
+          };
+
+          return t;
+        }(document, "script", "twitter-wjs"));
+    </script>
 </body>
 </html>
