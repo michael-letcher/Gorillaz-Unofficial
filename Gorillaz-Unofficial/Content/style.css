@@ -31,8 +31,8 @@ section:nth-of-type(even) {
     color: white;
 }
 .parallax {
-    background-image: url('../Images/Cover_01.jpg');
-    height: 150px;
+    background-image: url('../Images/Cover_02.jpg');
+    height: 100px;
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;
@@ -60,6 +60,10 @@ section:nth-of-type(even) {
 }
 .navbar-brand {
     font-family: Gorillaz1;
+}
+.navbar-brand img {
+    height: 30px;
+    width: auto;
 }
 .nav li a {
     font-family: Lato, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

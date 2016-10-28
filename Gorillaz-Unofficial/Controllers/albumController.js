@@ -5,11 +5,10 @@
 
     // to take an action after the data loads, use the $loaded() promise
     obj.$loaded().then(function () {
-        console.log("loaded record:", obj.$id, obj.someOtherKeyInData);
+        console.log("loaded record:", obj);
 
-        // To iterate the key/value pairs of the object, use angular.forEach()
-        angular.forEach(obj, function (value, key) {
-            console.log(key, value);
-        });
+        $scope.studioAlbums = obj.albums;
+        console.log("studioAlbums:", obj.albums);
     });
+
 });

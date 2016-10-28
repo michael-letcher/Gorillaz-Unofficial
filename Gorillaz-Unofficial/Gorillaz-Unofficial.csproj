@@ -156,6 +156,7 @@
     <Content Include="Images\phase4\Murdoc.jpg" />
     <Content Include="Images\phase4\Noodle.jpg" />
     <Content Include="Images\phase4\Russel.jpg" />
+    <Content Include="Images\site_logo.gif" />
     <Content Include="index.html" />
     <Content Include="home.min.html">
       <DependentUpon>index.html</DependentUpon>
