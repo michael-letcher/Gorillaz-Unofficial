@@ -8,6 +8,8 @@
     <title>Gorillaz-Unofficial - 100% Unoffical 100% Gorillaz</title>
     <link rel="icon" type="image/x-icon" href="fav.png" />
 
+    <base href="/"> 
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 
@@ -129,10 +131,15 @@
                     <div class="col-xs-12 col-sm-4 member-outer-wrapper" data-ng-repeat="album in studioAlbums">
                         <div class="member-inner-wrapper">
                             <h2 class="img-text">{{album.name}}</h2>
-                            <div class="cover"></div>
+                            <div class="cover" data-ng-click="openAlbum(album.name)"></div>
                             <img data-ng-src="{{album.imageURL}}" />
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div data-ng-view></div>
                 </div>
             </div>
         </div>
