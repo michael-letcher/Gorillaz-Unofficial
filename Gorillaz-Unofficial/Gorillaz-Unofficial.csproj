@@ -221,9 +221,6 @@
     <Content Include="Images\Gorillaz.jpg" />
     <Content Include="Images\Gorillaz_Cover.jpg" />
     <Content Include="entry.html" />
-    <Content Include="Views\album.htm" />
-    <Content Include="Views\albums.htm" />
-    <Content Include="Views\song.htm" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -237,6 +234,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
