@@ -81,8 +81,8 @@
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-4 col-md-3 member-outer-wrapper" data-ng-repeat="member in members">
-                    <div class="member-inner-wrapper">
+                <div class="col-xs-12 col-sm-4 col-md-3 item-outer-wrapper" data-ng-repeat="member in members">
+                    <div class="item-inner-wrapper">
                         <h2 class="img-text">{{member.name}}</h2>
                         <div class="cover" data-ng-click="bandModal(member.id)" data-toggle="modal" data-target="#band-modal"></div>
                         <img data-ng-src="{{phase == 1 && member.imagePhase1 || phase == 2 && member.imagePhase2 || phase == 3 && member.imagePhase3 || phase == 4 && member.imagePhase4}}" />
@@ -125,17 +125,29 @@
                     <h1 class="title">Discography</h1>
                     {{studioAlbums}}
                     <h4 class="title">Studio Albums</h4>
-                    <div class="loading">Loading...</div>
-                    <div class="col-xs-12 col-sm-4 member-outer-wrapper" data-ng-repeat="album in studioAlbums">
-                        <div class="member-inner-wrapper">
-                            <h2 class="img-text">{{album.name}}</h2>
-                            <div class="cover" data-ng-click="openAlbum(album.name)"></div>
-                            <img data-ng-src="{{album.imageURL}}" />
+                    
+                    <div id="loading">Loading...</div>
+
+                    <div id="discography-outer-wrapper">
+                        <div id="albums-inner-wrapper">
+                            <div class="col-xs-12 col-sm-4" data-ng-repeat="album in studioAlbums">
+                                <div class="item-inner-wrapper">
+                                    <h2 class="img-text">{{album.name}}</h2>
+                                    <div class="cover" data-ng-click="openAlbum($index)"></div>
+                                    <img data-ng-src="{{album.imageURL}}" />
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="title">Album View</h1>
+                        {{selectedAlbum}}
+                </div>
+            </div>
     </section>
 
     <div class="parallax"></div>
@@ -184,6 +196,8 @@
             </div>
         </div>
     </section>
+
+    <div class="parallax"></div>
 
     <!-- Footer -->
     <footer>

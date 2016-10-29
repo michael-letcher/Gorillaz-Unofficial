@@ -10,10 +10,23 @@
         $scope.studioAlbums = obj.albums;
         console.log("studioAlbums:", obj.albums);
 
-        $(".loading").hide();
+        $("#loading").hide();
     });
 
-    $scope.openAlbum = function (albumName) {
-        
+    $scope.openAlbum = function (id) {
+        var i = 0;
+        console.log(id);
+        // To iterate the key/value pairs of the object, use angular.forEach()
+        angular.forEach($scope.studioAlbums, function (value, key) {
+            if(i === id) {
+                ++i;
+                $scope.selectedAlbum = value;
+                return console.log("found: ", value);
+            }
+            else {
+                ++i;
+            }
+        });
+        console.log("selectedAlbum: ", $scope.selectedAlbum);
     }
 });
