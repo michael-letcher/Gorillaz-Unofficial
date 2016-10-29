@@ -1,4 +1,4 @@
-﻿app.controller("albumController", function ($scope, $firebaseObject) {
+﻿app.controller("albumController", function ($scope, $firebaseObject, $location) {
     var fireRef = new Firebase("https://gorillaz-unofficial.firebaseio.com/");
     
     var obj = $firebaseObject(fireRef);
@@ -9,6 +9,12 @@
 
         $scope.studioAlbums = obj.albums;
         console.log("studioAlbums:", obj.albums);
+
+        $(".loading").hide();
     });
 
+    $scope.openAlbum = function (albumName) {
+        $location.path('/album');
+        $location.search('album', albumName);
+    }
 });

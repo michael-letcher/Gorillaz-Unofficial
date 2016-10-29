@@ -1,17 +1,21 @@
 ﻿var app = angular.module('GorillazApp', ['ngRoute', 'firebase']);
 
-app.config(function ($routeProvider) {
+app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
-    .when("/", {
-        templateUrl: "main.htm"
-    })
-    .when("/red", {
-        templateUrl: "red.htm"
-    })
-    .when("/green", {
-        templateUrl: "green.htm"
-    })
-    .when("/blue", {
-        templateUrl: "blue.htm"
-    });
+        .when("/", {
+            templateUrl: "views/albums.htm"
+        })
+        .when("/album", {
+            templateUrl: "views/album.htm"
+        })
+        .when("/green", {
+            templateUrl: "views/song.htm"
+        })
+        .otherwise({
+            template: "<h1>None</h1><p>Nothing has been selected.</p>"
+        });
+
+    // Turn on pretty URL (removes /#/ from URL
+    //$locationProvider.html5Mode(true);
+
 });
