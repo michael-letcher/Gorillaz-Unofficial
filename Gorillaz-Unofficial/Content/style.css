@@ -26,6 +26,9 @@ body {
         top: -60px;
     }
 }
+section {
+    padding-bottom: 20px;
+}
 section:nth-of-type(even) {
     background-color: black;
     color: white;
