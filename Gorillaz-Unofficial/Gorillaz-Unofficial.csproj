@@ -137,6 +137,7 @@
     <Content Include="Images\Cover_01.jpg" />
     <Content Include="Images\Cover_02.jpg" />
     <Content Include="Images\Cover_03.jpg" />
+    <Content Include="Images\Cover_04.jpg" />
     <Content Include="Images\phase1\2D.png" />
     <Content Include="Images\phase1\Murdoc.jpg" />
     <Content Include="Images\phase1\Noodle.png" />
