@@ -1,1 +1,1 @@
-﻿var app = angular.module('GorillazApp', ['ngRoute', 'firebase']);
+﻿var app = angular.module('GorillazApp', ['ngAnimate', 'firebase']);

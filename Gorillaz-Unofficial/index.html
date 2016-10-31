@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/">
-                    <img src="Images/site_logo.gif" />
+                    <img src="Images/site_logo.gif" alt="Gorrilaz-Unofficial" />
                 </a>
             </div>
 
@@ -74,10 +74,10 @@
 
                 <div class="btn-toolbar col-xs-12">
                     <div class="btn-group">
-                        <a class="btn" ng-class="phase == 1 ? 'active' : ''" data-ng-click="phase = 1">PHASE 1</a>
-                        <a class="btn" ng-class="phase == 2 ? 'active' : ''" data-ng-click="phase = 2">PHASE 2</a>
-                        <a class="btn" ng-class="phase == 3 ? 'active' : ''" data-ng-click="phase = 3">PHASE 3</a>
-                        <a class="btn" ng-class="phase == 4 ? 'active' : ''" data-ng-click="phase = 4">PHASE 4</a>
+                        <a class="btn" data-ng-class="phase == 1 ? 'active' : ''" data-ng-click="phase = 1">PHASE 1</a>
+                        <a class="btn" data-ng-class="phase == 2 ? 'active' : ''" data-ng-click="phase = 2">PHASE 2</a>
+                        <a class="btn" data-ng-class="phase == 3 ? 'active' : ''" data-ng-click="phase = 3">PHASE 3</a>
+                        <a class="btn" data-ng-class="phase == 4 ? 'active' : ''" data-ng-click="phase = 4">PHASE 4</a>
                     </div>
                 </div>
 
@@ -85,7 +85,7 @@
                     <div class="item-inner-wrapper">
                         <h2 class="img-text">{{member.name}}</h2>
                         <div class="cover" data-ng-click="bandModal(member.id)" data-toggle="modal" data-target="#band-modal"></div>
-                        <img data-ng-src="{{phase == 1 && member.imagePhase1 || phase == 2 && member.imagePhase2 || phase == 3 && member.imagePhase3 || phase == 4 && member.imagePhase4}}" />
+                        <img class="img-responsive" data-ng-src="{{phase == 1 && member.imagePhase1 || phase == 2 && member.imagePhase2 || phase == 3 && member.imagePhase3 || phase == 4 && member.imagePhase4}}" alt="{{member.name}}" />
                     </div>
                 </div>
             </div>
@@ -123,71 +123,72 @@
             <div class="row">
                 <div class="col-sm-12">
                     <h1 class="title">Discography</h1>
-
-                    <hr />
-                    studioAlbums: {{studioAlbums}}
-                    <hr />
-                    breadcrumbs: {{breadcrumbs}}
-                    <hr />
-
                     <ul class="breadcrumb">
-                        <li data-ng-repeat="crumb in breadcrumbs" data-ng-class="crumb.active ? 'active' : ''">
-                            <a data-ng-hide="$last" href="{{crumb.location}}">{{crumb.name}}</a>
-                            <span data-ng-show="$last">{{crumb.name}}</span>
+                        <li data-ng-repeat="crumb in breadcrumbs" data-ng-class="crumb.active ? 'active' : ''"><a data-ng-hide="$last" href="javascript:void(0)" data-ng-click="move(crumb.name, crumb.view)">{{crumb.name}}</a><span data-ng-show="$last">{{crumb.name}}</span>
                         </li>
                     </ul>
-                    <div id="loading">Loading...</div>
-                    <!-- .fade .in.active -->
-                    <div id="discography-outer-wrapper">
-                        <div id="albums-inner-wrapper">
-                            <div class="col-xs-12 col-sm-4" data-ng-repeat="album in studioAlbums">
-                                <div class="item-inner-wrapper">
-                                    <!--<h2 class="img-text">{{album.name}}</h2>-->
-                                    <div class="cover" data-ng-click="openAlbum($index)"></div>
-                                    <img data-ng-src="{{album.imageURL}}" />
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
                 </div>
             </div>
+            <div id="loading">Loading...</div>
+            <!-- Animate Container -->
+            <div class="animate-switch-container" data-ng-switch on="view">
+                <!-- Albums View -->
+                <div class="row animate-switch" data-ng-switch-default>
+                    <div class="col-sm-12">
+                        <!-- .fade .in.active -->
+                        <div id="discography-outer-wrapper">
+                            <div id="albums-inner-wrapper">
+                                <div class="col-xs-12 col-sm-4" data-ng-repeat="album in studioAlbums">
+                                    <div class="item-inner-wrapper">
+                                        <!--<h2 class="img-text">{{album.name}}</h2>-->
+                                        <div class="cover" data-ng-click="openAlbum($index)"></div>
+                                        <img class="img-responsive" data-ng-src="{{album.imageURL}}" />
+                                    </div>
+                                </div>
 
-            <hr />
-            selectedAlbum: {{selectedAlbum}}
-            <hr />
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <h2 class="title">{{selectedAlbum.name || 'Album Name'}}</h2>
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-md-6">
-                            <h2 class="title">{{selectedAlbum.year || 'Year'}}</h2>
-                        </div>
-
                     </div>
-                    <p class="title">{{selectedAlbum.type || 'Type'}}</p>
-                    <p class="title">{{selectedAlbum.edition || 'Edition'}}</p>
-           
-                    <h3 class="title">Tracklist</h3>
                 </div>
-                <div class="col-xs-12 col-md-6">
-                    <table class="table">
-                        <tbody>
-                            <tr data-ng-repeat="(song, songData) in selectedAlbum.songs">
-                                <td>{{$index}}</td>
-                                <td>{{song}}</td>
-                                <td style="width:35px">{{songData.duration}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <!-- Album View -->
+                <div class="row animate-switch" data-ng-switch-when="album">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <h2 class="title">{{selectedAlbum.name || 'Album Name'}}</h2>
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <h2 class="title text-right">{{selectedAlbum.year || 'Year'}}</h2>
+                            </div>
+                        </div>
+                        <p class="title">{{selectedAlbum.type || 'Type'}}</p>
+                        <p class="title">{{selectedAlbum.edition || 'Edition'}}</p>
+           
+                        <h3 class="title">Tracklist</h3>
+                        <table class="table">
+                            <tbody>
+                                <tr data-ng-repeat="(song, songData) in selectedAlbum.songs">
+                                    <td style="width:40px">{{$index + 1}}</td>
+                                    <td>{{song}}</td>
+                                    <td style="width:40px">{{songData.duration}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <img class="img-responsive" data-ng-src="{{selectedAlbum.imageURL}}" />
+                    </div>
                 </div>
             </div>
         </div>
+    <code>studioAlbums: {{studioAlbums}}</code>
+    <hr />
+    <code>breadcrumbs: {{breadcrumbs}}</code>
+    <hr />
+    <code>selectedAlbum: {{selectedAlbum}}</code>
+    <hr />
+    <code>view={{view}}</code>
     </section>
-
     <div class="parallax"></div>
 
     <!-- About Section -->
@@ -248,7 +249,7 @@
                 </div>
                 <div class="col-xs-12">
                     <h6 class="text-center">
-                        Gorillaz-Unofficial ©2004-2016 | Designed and built by <a href="http://michaelletcher.com" alt="MichaelLetcher Web Design">MichaelLetcher Web Design</a></span>
+                        Gorillaz-Unofficial ©2004-2016 | Designed and built by <a href="http://michaelletcher.com" title="MichaelLetcher Web Design">MichaelLetcher Web Design</a>
                     </h6>
                 </div>
             </div>
@@ -268,7 +269,7 @@
 
     <!-- Angular + Firebase -->
     <script src="Scripts/angular.min.js"></script>
-    <script src="Scripts/angular-route.min.js"></script>
+    <script src="Scripts/angular-animate.min.js"></script>
     <script src="Scripts/firebase.js"></script>
     <script src="Scripts/angularfire.min.js"></script>
 
@@ -279,6 +280,7 @@
 
     <script src="Scripts/script.js"></script>
 
+    <!-- Twitter JS -->
     <script>
         window.twttr = (function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0],

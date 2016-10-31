@@ -2,11 +2,11 @@
     var fireRef = new Firebase("https://gorillaz-unofficial.firebaseio.com/");
     
     var obj = $firebaseObject(fireRef);
-
+    $scope.view = 'albums';
     $scope.breadcrumbs = [
         {
             name: 'Studio Albums',
-            location: '#',
+            view: 'albums',
             active: true
         }
     ];
@@ -28,9 +28,11 @@
         angular.forEach($scope.studioAlbums, function (value, key) {
             if(i === id) {
                 ++i;
+                // Populate View
                 $scope.selectedAlbum = value;
-                addBreadcrumb($scope.selectedAlbum.name,'#');
-                return console.log("found: ", value);
+                // Show View
+                $scope.move($scope.selectedAlbum.name, 'album')
+                
             }
             else {
                 ++i;
@@ -39,14 +41,29 @@
         console.log("selectedAlbum: ", $scope.selectedAlbum);
     }
 
-    function addBreadcrumb(name, location) {
+    function updateBreadcrumbs(viewName, view) {
         angular.forEach($scope.breadcrumbs, function (obj, index) {
             obj.active = false;
         });
-        $scope.breadcrumbs.push({
-            name: name,
-            location: location,
-            active: true
-        });
+        if (view == 'albums') {
+            $scope.breadcrumbs = [{
+                name: viewName,
+                view: view,
+                active: true
+            }];
+        } else {
+            $scope.breadcrumbs.push({
+                name: viewName,
+                view: view,
+                active: true
+            });
+        }
+    }
+
+    $scope.move = function (viewName, view) {
+        updateBreadcrumbs(viewName, view);
+        $scope.view = view;
+        console.log('Moving to ' + view);
+
     }
 });
