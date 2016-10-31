@@ -3,6 +3,14 @@
     
     var obj = $firebaseObject(fireRef);
 
+    $scope.breadcrumbs = [
+        {
+            name: 'Studio Albums',
+            location: '#',
+            active: true
+        }
+    ];
+
     // to take an action after the data loads, use the $loaded() promise
     obj.$loaded().then(function () {
         console.log("loaded record:", obj);
@@ -21,6 +29,7 @@
             if(i === id) {
                 ++i;
                 $scope.selectedAlbum = value;
+                addBreadcrumb($scope.selectedAlbum.name,'#');
                 return console.log("found: ", value);
             }
             else {
@@ -28,5 +37,16 @@
             }
         });
         console.log("selectedAlbum: ", $scope.selectedAlbum);
+    }
+
+    function addBreadcrumb(name, location) {
+        angular.forEach($scope.breadcrumbs, function (obj, index) {
+            obj.active = false;
+        });
+        $scope.breadcrumbs.push({
+            name: name,
+            location: location,
+            active: true
+        });
     }
 });

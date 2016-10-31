@@ -44,6 +44,9 @@ section:nth-of-type(even) {
 }
 
 /* Typography */
+a, a:focus, a:hover {
+    color: red;
+}
 .title {
     text-transform: uppercase;
 }
@@ -142,22 +145,28 @@ section:nth-of-type(even) {
 .item-inner-wrapper > img {
     max-height: 302px;
     max-width: 236px;
+    -webkit-transition: all 0.3s; /* Safari */
+    transition: all 0.3s;
 }
 .item-inner-wrapper h2, .item-inner-wrapper div {
     position:absolute;
     top: 0;
     width: 100%;
     opacity: 0;
-    -webkit-transition: opacity 0.5s; /* Safari */
-    transition: opacity 0.5s;
+    -webkit-transition: all 0.3s ease-in-out; /* Safari */
+    transition: all 0.3s ease-in-out;
 }
 .item-inner-wrapper:hover h2, .item-inner-wrapper:hover div {
     opacity: 1;
+    transform: scale(1.5);
+}
+.item-inner-wrapper:hover img {
+    transform: scale(1.1);
 }
 
 /* Footer */
 footer {
-    background-color: gainsboro;
+    background-color: white;
     color: black;
     margin: 0;
     padding: 50px 0;
