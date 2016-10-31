@@ -11,6 +11,10 @@
         {
             imageURL: 'Images/Cover_03.jpg',
             isActive: ''
+        },
+        {
+            imageURL: 'Images/Cover_04.jpg',
+            isActive: ''
         }
     ];
     
