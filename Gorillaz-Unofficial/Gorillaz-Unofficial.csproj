@@ -116,8 +116,6 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\bootstrap.paper.css" />
-    <Content Include="Content\bootstrap.paper.min.css" />
     <Content Include="Content\entry.css" />
     <Content Include="Content\entry.min.css">
       <DependentUpon>entry.css</DependentUpon>
