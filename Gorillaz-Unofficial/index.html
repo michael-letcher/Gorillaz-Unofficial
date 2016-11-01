@@ -64,7 +64,7 @@
             </div>
         </div>
     </div>
-
+    {{random}}
     <!-- Band Section -->
     <div id="band-location"></div>
     <section data-ng-controller="bandController" id="band-wrapper">
@@ -124,7 +124,8 @@
                 <div class="col-sm-12">
                     <h1 class="title">Discography</h1>
                     <ul class="breadcrumb">
-                        <li data-ng-repeat="crumb in breadcrumbs" data-ng-class="crumb.active ? 'active' : ''"><a data-ng-hide="$last" href="javascript:void(0)" data-ng-click="move(crumb.name, crumb.view)">{{crumb.name}}</a><span data-ng-show="$last">{{crumb.name}}</span>
+                        <li data-ng-repeat="crumb in breadcrumbs" data-ng-class="crumb.active ? 'active' : ''">
+                            <a data-ng-hide="$last" href="javascript:void(0)" data-ng-click="move(crumb.name, crumb.view, $index)">{{crumb.name}}</a><span data-ng-show="$last">{{crumb.name}}</span>
                         </li>
                     </ul>
                 </div>
@@ -163,13 +164,13 @@
                         </div>
                         <p class="title">{{selectedAlbum.type || 'Type'}}</p>
                         <p class="title">{{selectedAlbum.edition || 'Edition'}}</p>
-           
+
                         <h3 class="title">Tracklist</h3>
-                        <table class="table">
+                        <table class="table table-hover">
                             <tbody>
-                                <tr data-ng-repeat="(song, songData) in selectedAlbum.songs">
+                                <tr data-ng-repeat="(song, songData) in selectedAlbum.songs" data-ng-click="openSong($index)" class="cursor">
                                     <td style="width:40px">{{$index + 1}}</td>
-                                    <td>{{song}}</td>
+                                    <td>{{songData.name || song}}</td>
                                     <td style="width:40px">{{songData.duration}}</td>
                                 </tr>
                             </tbody>
@@ -179,15 +180,26 @@
                         <img class="img-responsive" data-ng-src="{{selectedAlbum.imageURL}}" />
                     </div>
                 </div>
+                <!-- Song View -->
+                <div class="row animate-switch" data-ng-switch-when="song">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <h2 class="title">{{selectedSong.name || 'Song Name'}}</h2>
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <h2 class="title text-right">{{selectedSong.duration || 'Duration'}}</h2>
+                            </div>
+                        </div>
+                        <p class="title">{{selectedAlbum.type || 'Lyrics'}}</p>
+
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <img class="img-responsive" data-ng-src="{{selectedAlbum.imageURL}}" />
+                    </div>
+                </div>
             </div>
         </div>
-    <code>studioAlbums: {{studioAlbums}}</code>
-    <hr />
-    <code>breadcrumbs: {{breadcrumbs}}</code>
-    <hr />
-    <code>selectedAlbum: {{selectedAlbum}}</code>
-    <hr />
-    <code>view={{view}}</code>
     </section>
     <div class="parallax"></div>
 
@@ -223,13 +235,50 @@
                     <h1 class="title">Contact</h1>
                 </div>
                 <div class="col-sm-12 col-md-4">
-                    <h4 class="title">Form title</h4>
-                    <div>form...</div>
+                    <div class="well">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <legend>Message GU</legend>
+                                <div class="form-group">
+                                    <label for="inputName" class="col-md-2 control-label">Name</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="inputName" placeholder="Your Name">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputEmail" class="col-md-2 control-label">Email</label>
+                                    <div class="col-md-10">
+                                        <input type="email" class="form-control" id="inputEmail" placeholder="Your Email">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="textArea" class="col-md-2 control-label">Message</label>
+                                    <div class="col-md-10">
+                                        <textarea class="form-control" rows="4" id="textArea"></textarea>
+                                        <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <legend>CAPTCHA</legend>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-10 col-md-offset-2">
+                                        <button type="button" class="btn btn-default">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
                 </div>
-                <div class="col-xs-12 col-sm-4">
+                <div class="col-xs-12 col-sm-6">
                     <a class="twitter-timeline" data-dnt="true" data-theme="light" data-height="500" href="https://twitter.com/gorillaz_u">Tweets by gorillaz_u</a>
                 </div>
-                <div class="col-xs-12 col-sm-4">
+                <div class="col-xs-12 col-sm-6">
                     <a class="twitter-timeline" data-dnt="true" data-theme="light" data-height="500" href="https://twitter.com/gorillaz">Tweets by gorillaz</a>
                 </div>
             </div>
@@ -282,21 +331,21 @@
 
     <!-- Twitter JS -->
     <script>
-        window.twttr = (function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0],
-            t = window.twttr || {};
-          if (d.getElementById(id)) return t;
-          js = d.createElement(s);
-          js.id = id;
-          js.src = "https://platform.twitter.com/widgets.js";
-          fjs.parentNode.insertBefore(js, fjs);
+        window.twttr = (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0],
+              t = window.twttr || {};
+            if (d.getElementById(id)) return t;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
 
-          t._e = [];
-          t.ready = function(f) {
-            t._e.push(f);
-          };
+            t._e = [];
+            t.ready = function (f) {
+                t._e.push(f);
+            };
 
-          return t;
+            return t;
         }(document, "script", "twitter-wjs"));
     </script>
 </body>

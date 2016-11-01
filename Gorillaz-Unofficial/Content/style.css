@@ -10,6 +10,9 @@ body {
     background-color: white;
     color: black;
 }
+.cursor{
+    cursor: pointer;
+}
 .container-wrapper {
     min-height: 95%;
 }
