@@ -1,8 +1,6 @@
 ﻿/* Created with assistence from Lyle Singleton */
 
 app.controller("albumController", function ($scope, $firebaseObject, $log) {
-    console.log('$scope',$scope);
-
     var fireRef = new Firebase("https://gorillaz-unofficial.firebaseio.com/");
     var obj = $firebaseObject(fireRef);
     // to take an action after the data loads, use the $loaded() promise
@@ -21,6 +19,8 @@ app.controller("albumController", function ($scope, $firebaseObject, $log) {
         $scope.view.Init(obj);
 
         $("#loading").hide();
+
+        console.log('$scope', $scope);
     });
 
 
@@ -72,17 +72,18 @@ app.controller("albumController", function ($scope, $firebaseObject, $log) {
                 // if data is not passed in, through error
                 $log.error('Error: Breadcrumb data undefined.');
             } else {
+
+
                 //read data (only albums currently)
                 var lastID;
                 var lastNavObject = null;
+                // Create nav object
+                var rootObject = new Navigable("Studio Albums", "album");
                 angular.forEach(data.albums, function (value, key) {
-                    console.log(key, value);
-                    // Create nav object
-                    var lastNavObject = new Navigable("Studio Albums", "album");
                     // Set ID of new object
                     lastID = lastNavObject.id;
                     // Set to view
-                    $scope.view.AddNavigable(new Navigable("Studio Albums", "album"), null);
+                    rootObject.AddChild(new Navigable("Studio Albums", "album"), lastID);
                 });
                 // update tree
                 this.UpdateSelected(this.rootNavigable.id);
@@ -113,7 +114,6 @@ app.controller("albumController", function ($scope, $firebaseObject, $log) {
          * Return: navigable object
          */
         this.AddNavigable = function (newNavigable, parentNavigable) {
-
             if (parentNavigable != null) {
                 parentNavigable.AddChild(newNavigable);
                 this.navigables[newNavigable.id] = newNavigable;
