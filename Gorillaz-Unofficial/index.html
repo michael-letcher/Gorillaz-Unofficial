@@ -124,8 +124,13 @@
                 <div class="col-sm-12">
                     <h1 class="title">Discography</h1>
                     <ul class="breadcrumb">
-                        <li data-ng-repeat="crumb in breadcrumbs" data-ng-class="crumb.active ? 'active' : ''">
+                        <li data-ng-repeat="crumb in breadcrumbs" data-ng-class="$last ? 'active' : ''">
                             <a data-ng-hide="$last" href="javascript:void(0)" data-ng-click="move(crumb.name, crumb.view, $index)">{{crumb.name}}</a><span data-ng-show="$last">{{crumb.name}}</span>
+                        </li>
+                    </ul>
+                    <ul class="breadcrumb">
+                        <li data-ng-repeat="crumb in view.breadcrumbs" data-ng-class="$last ? 'active' : ''">
+                            <a data-ng-hide="$last" href="javascript:void(0)" data-ng-click="">{{crumb.title}}</a><span data-ng-show="$last">{{crumb.title}}</span>
                         </li>
                     </ul>
                 </div>

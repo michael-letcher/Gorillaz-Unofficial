@@ -113,6 +113,9 @@ a, a:focus, a:hover {
 }
 
 /* Discography */
+.breadcrumb {
+    color: #333;
+}
 #discography-wrapper {
     min-height: 500px;
 }
@@ -167,14 +170,11 @@ a, a:focus, a:hover {
 /* Item Style */
 /*.item-outer-wrapper {}*/
 .item-inner-wrapper {
-    display: table; /*forces divs width to the content within */
     position: relative;
     margin: auto;
     overflow: hidden;
 }
 .item-inner-wrapper > img {
-    max-height: 302px;
-    max-width: 236px;
     -webkit-transition: all 0.3s; /* Safari */
     transition: all 0.3s;
 }
