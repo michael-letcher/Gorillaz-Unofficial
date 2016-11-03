@@ -59,14 +59,13 @@
             <!--<div class="jumbotron carousel-caption">
                 Phase 4 is here
             </div>-->
-            <div class="item {{x.isActive}}" data-ng-repeat="x in slides track by $index | toArray:false | orderBy:random">
+            <div class="item {{x.isActive}}" data-ng-repeat="x in slides">
                 <div class="fill" style="background-image:url('{{x.imageURL}}');"></div>
             </div>
         </div>
     </div>
 
-    <div class="fill">
-    </div>
+    <div class="fill"></div>
 
         <!-- Band Section -->
         <div id="band-location"></div>
@@ -236,7 +235,7 @@
                     <div class="col-sm-12">
                         <h1 class="title">Contact</h1>
                     </div>
-                    <div class="col-sm-12 col-md-4">
+                    <div class="col-xs-12 col-sm-6 col-md-4">
                         <div class="well">
                             <form class="form-horizontal">
                                 <fieldset>
@@ -244,21 +243,21 @@
                                     <div class="form-group">
                                         <label for="inputName" class="col-md-2 control-label">Name</label>
                                         <div class="col-md-10">
-                                            <input type="text" class="form-control" id="inputName" placeholder="Your Name">
+                                            <input type="text" class="form-control" id="inputName" placeholder="Your Name" required>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="inputEmail" class="col-md-2 control-label">Email</label>
                                         <div class="col-md-10">
-                                            <input type="email" class="form-control" id="inputEmail" placeholder="Your Email">
+                                            <input type="email" class="form-control" id="inputEmail" placeholder="Your Email" required>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="textArea" class="col-md-2 control-label">Message</label>
                                         <div class="col-md-10">
-                                            <textarea class="form-control" rows="4" id="textArea"></textarea>
+                                            <textarea class="form-control" rows="4" id="textArea" required></textarea>
                                             <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
                                         </div>
                                     </div>
@@ -277,10 +276,10 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-6">
+                    <div class="col-xs-12 col-sm-6 col-md-4">
                         <a class="twitter-timeline" data-dnt="true" data-theme="light" data-height="500" href="https://twitter.com/gorillaz_u">Tweets by gorillaz_u</a>
                     </div>
-                    <div class="col-xs-12 col-sm-6">
+                    <div class="col-xs-12 col-sm-6 col-md-4">
                         <a class="twitter-timeline" data-dnt="true" data-theme="light" data-height="500" href="https://twitter.com/gorillaz">Tweets by gorillaz</a>
                     </div>
                 </div>

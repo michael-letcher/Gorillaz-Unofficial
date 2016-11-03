@@ -40,16 +40,15 @@ section:nth-of-type(odd) {
     background-color: white;
 }
 .parallax {
-    background-image: url('../Images/Cover_02.jpg');
     height: 100px;
-    /* Create the parallax scrolling effect */
+    /* Create the parallax scrolling effect
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover;*/
 }
 
-/* Typography */
+/* Typography 
 a, a:focus, a:hover {
     color: red;
 }
