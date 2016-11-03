@@ -36,6 +36,9 @@ section:nth-of-type(even) {
     background-color: black;
     color: white;
 }
+section:nth-of-type(odd) {
+    background-color: white;
+}
 .parallax {
     background-image: url('../Images/Cover_02.jpg');
     height: 100px;
@@ -80,6 +83,12 @@ a, a:focus, a:hover {
 }
 
 /* Slider */
+#home-carousel {
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: -2;
+}
 .carousel-inner .fill {
     background-size: cover;
     background-position: center top;
@@ -113,6 +122,9 @@ a, a:focus, a:hover {
 }
 
 /* Discography */
+#breadcrumbs {
+    display: none;
+}
 .breadcrumb {
     color: #333;
 }
@@ -139,12 +151,15 @@ a, a:focus, a:hover {
     /*top: 100px;*/
     margin-left: -25%;
 }
+#discography tr:hover {
+    color: black;
+}
 
 /* Discography Animation */
 /* https://docs.angularjs.org/api/ng/directive/ngSwitch */
 .animate-switch-container {
   position: relative;
-  height: 400px;
+  min-height: 500px;
   overflow: hidden;
 }
 .animate-switch {
@@ -173,6 +188,7 @@ a, a:focus, a:hover {
     position: relative;
     margin: auto;
     overflow: hidden;
+    display: inline-block;
 }
 .item-inner-wrapper > img {
     -webkit-transition: all 0.3s; /* Safari */

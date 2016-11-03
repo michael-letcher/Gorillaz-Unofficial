@@ -128,6 +128,7 @@
       <DependentUpon>style.css</DependentUpon>
     </Content>
     <Content Include="Controllers\bandController.js" />
+    <Content Include="Controllers\Filters\disorgraphyFilter.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\Cover_01.jpg" />

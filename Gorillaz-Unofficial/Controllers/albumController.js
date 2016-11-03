@@ -12,18 +12,15 @@ app.controller("albumController", function ($scope, $firebaseObject, $log) {
         // Create View obj
         $scope.view = new view();
 
-        //temp
-        $scope.view.AddNavigable(new Navigable("Studio Albums", "albums"), null);
-
         // Initialise View
         $scope.view.Init(obj);
 
         $("#loading").hide();
+        $("#breadcrumbs").show();
 
-        console.log('$scope', $scope);
+        console.log("$scope", $scope);
     });
-
-
+    //obj.$destroy();
 
     /* Public UUID()
      * Parameters: NA
@@ -38,25 +35,24 @@ app.controller("albumController", function ($scope, $firebaseObject, $log) {
         this.title = title;
         this.parent = null; // Navigable Object
         this.children = []; // Navigable Objects
-        this.itemData = null; // Object
+        this.data = null; // Object
         this.display = display;
         /* Private AddChild()
          * Info: Adds another Navigable to the Navigable.children array and wires up the child's Navigable.parent
          * Parameters: newChildElement (Navigable ojbect)
          * Return: NA
          */
-        this.AddChild = function (newChildElement){
-            this.children.push(newChildElement);
-            newChildElement.parent = this;
+        this.AddChild = function (newChild){
+            this.children.push(newChild);
+            newChild.parent = this;
         };
     }
 
     function view() {
         this.selectedNavigable = null;
         this.rootNavigable = null;
-        this.navigables = [];
+        this.navigables = {};
         this.breadcrumbs = [];
-        this.currentdisplay = "";
 
         // NavigableID can be omitted or a value held by a Navigable object 
         // added to this object using View.AddNavigable()
@@ -72,20 +68,35 @@ app.controller("albumController", function ($scope, $firebaseObject, $log) {
                 // if data is not passed in, through error
                 $log.error('Error: Breadcrumb data undefined.');
             } else {
-
-
                 //read data (only albums currently)
                 var lastID;
                 var lastNavObject = null;
-                // Create nav object
-                var rootObject = new Navigable("Studio Albums", "album");
+                // Create Navigable object
+                var rootObject = new Navigable("Studio Albums", "root");
+                // Add root to view
+                this.AddNavigable(rootObject);
+
                 angular.forEach(data.albums, function (value, key) {
-                    // Set ID of new object
-                    lastID = lastNavObject.id;
-                    // Set to view
-                    rootObject.AddChild(new Navigable("Studio Albums", "album"), lastID);
+                    // Create Navigable object
+                    var newAlbum = new Navigable(value.name, value.type);
+                    // Set data to new object
+                    newAlbum.data = value;
+                    // Add album to View
+                    $scope.view.AddNavigable(newAlbum, rootObject);
+
+                    // Set Songs
+                    angular.forEach(newAlbum.data.songs, function (value, key) {
+                        // Create Navigable object
+                        var newSong = new Navigable(key, 'Song');
+                        // Set data to new object
+                        newSong.data = value;
+                        // Set Song to View and Album
+                        $scope.view.AddNavigable(newSong, newAlbum);
+                    });
+
                 });
-                // update tree
+                
+                // Update tree
                 this.UpdateSelected(this.rootNavigable.id);
             }
         }
@@ -102,9 +113,9 @@ app.controller("albumController", function ($scope, $firebaseObject, $log) {
             var newSelection = this.navigables[navigableID];
 
             if (typeof newSelection != 'undefined') {
-                this.selectedNavigable = newSelection;
+                $scope.selected = this.selectedNavigable = newSelection;
                 this.UpdateBreadcrumbs();
-                //this.HTMLBreadcrumbs();
+                console.log(this.selectedNavigable);
             }
         }
         
@@ -155,97 +166,5 @@ app.controller("albumController", function ($scope, $firebaseObject, $log) {
             }
             return result;
         }
-
-        //Not required
-        this.HTMLBreadcrumbs = function () {
-            var div = document.getElementById(this.breadcumbsPlaceholderID);
-            div.innerHTML = "<ol>";
-
-            for (i = 0; i < this.breadcrumbs.length; i++) {
-                div.innerHTML += '<li><a href="#" onclick="view.UpdateSelected(\'' + this.breadcrumbs[i].id + '\')">' + this.breadcrumbs[i].title + "</a></li>";
-            }
-
-            div.innerHTML += "</ol>";
-        }
-    }
-
-
-    $scope.openAlbum = function (id) {
-        var i = 0;
-        console.log(id);
-        // To iterate the key/value pairs of the object, use angular.forEach()
-        angular.forEach($scope.studioAlbums, function (value, key) {
-            if(i === id) {
-                ++i;
-                // Populate View
-                $scope.selectedAlbum = value;
-                // Show View
-                $scope.move($scope.selectedAlbum.name, 'album', -1)
-                
-            }
-            else {
-                ++i;
-            }
-        });
-        console.log("selectedAlbum: ", $scope.selectedAlbum);
-    }
-    $scope.openSong = function (id) {
-        var i = 0;
-        console.log(id);
-        // To iterate the key/value pairs of the object, use angular.forEach()
-        angular.forEach($scope.selectedAlbum.songs, function (value, key) {
-            if (i === id) {
-                ++i;
-                // Populate View
-                $scope.selectedSong = {
-                    name: key,
-                    duration: value.duration
-                };
-                // Show View
-                $scope.move($scope.selectedSong.name, 'song', -1)
-
-            }
-            else {
-                ++i;
-            }
-        });
-        console.log("selectedSong: ", $scope.selectedSong);
-    }
-
-    function updateBreadcrumbs(viewName, view) {
-        // Set all active to false
-        angular.forEach($scope.breadcrumbs, function (obj, index) {
-            obj.active = false;
-        });
-
-        // Set new location
-        // [BACK] if moving root (Lv 1)
-        if (view == 'albums') {
-            $scope.breadcrumbs = [{
-                name: viewName,
-                view: view,
-                active: true
-            }];
-        // [BACK] if moving from Song to Album (Lv 3 to Lv 2)
-        } else if (view == 'album' && $scope.view == 'song') {
-            $scope.breadcrumbs.push({
-                name: viewName,
-                view: view,
-                active: true
-            });
-        // [FORWARD] everything else
-        } else {
-            $scope.breadcrumbs.push({
-                name: viewName,
-                view: view,
-                active: true
-            });
-        }
-    }
-
-    $scope.move = function (viewName, view, $index) {
-        updateBreadcrumbs(viewName, view);
-        $scope.view = view;
-        console.log('Moving to ' + view);
     }
 });
