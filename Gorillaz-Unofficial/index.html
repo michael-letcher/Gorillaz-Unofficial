@@ -67,289 +67,305 @@
 
     <div class="fill"></div>
 
-        <!-- Band Section -->
-        <div id="band-location"></div>
-        <section data-ng-controller="bandController" id="band-wrapper">
-            <div id="band" class="container" data-ng-cloak>
-                <div class="row">
-                    <h1 class="title col-xs-12">The Band</h1>
+    <!-- Band Section -->
+    <div id="band-location"></div>
+    <section data-ng-controller="bandController" id="band-wrapper">
+        <div id="band" class="container" data-ng-cloak>
+            <div class="row">
+                <h1 class="title col-xs-12">The Band</h1>
 
-                    <div class="btn-toolbar col-xs-12">
-                        <div class="btn-group">
-                            <a class="btn" data-ng-class="phase == 1 ? 'active' : ''" data-ng-click="phase = 1">PHASE 1</a>
-                            <a class="btn" data-ng-class="phase == 2 ? 'active' : ''" data-ng-click="phase = 2">PHASE 2</a>
-                            <a class="btn" data-ng-class="phase == 3 ? 'active' : ''" data-ng-click="phase = 3">PHASE 3</a>
-                            <a class="btn" data-ng-class="phase == 4 ? 'active' : ''" data-ng-click="phase = 4">PHASE 4</a>
-                        </div>
+                <div class="btn-toolbar col-xs-12">
+                    <div class="btn-group">
+                        <a class="btn" data-ng-class="phase == 1 ? 'active' : ''" data-ng-click="phase = 1">PHASE 1</a>
+                        <a class="btn" data-ng-class="phase == 2 ? 'active' : ''" data-ng-click="phase = 2">PHASE 2</a>
+                        <a class="btn" data-ng-class="phase == 3 ? 'active' : ''" data-ng-click="phase = 3">PHASE 3</a>
+                        <a class="btn" data-ng-class="phase == 4 ? 'active' : ''" data-ng-click="phase = 4">PHASE 4</a>
                     </div>
+                </div>
 
-                    <div class="col-xs-6 col-sm-4 col-md-3 item-outer-wrapper" data-ng-repeat="member in members">
-                        <div class="item-inner-wrapper">
-                            <h2 class="img-text">{{member.name}}</h2>
-                            <div class="cover" data-ng-click="bandModal(member.id)" data-toggle="modal" data-target="#band-modal"></div>
-                            <img class="img-responsive" data-ng-src="{{phase == 1 && member.imagePhase1 || phase == 2 && member.imagePhase2 || phase == 3 && member.imagePhase3 || phase == 4 && member.imagePhase4}}" alt="{{member.name}}" />
-                        </div>
+                <div class="col-xs-6 col-sm-4 col-md-3 item-outer-wrapper" data-ng-repeat="member in members">
+                    <div class="item-inner-wrapper">
+                        <h2 class="img-text">{{member.name}}</h2>
+                        <div class="cover" data-ng-click="bandModal(member.id)" data-toggle="modal" data-target="#band-modal"></div>
+                        <img class="img-responsive" data-ng-src="{{phase == 1 && member.imagePhase1 || phase == 2 && member.imagePhase2 || phase == 3 && member.imagePhase3 || phase == 4 && member.imagePhase4}}" alt="{{member.name}}" />
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Band Modal -->
-            <div id="band-modal" class="modal fade">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title">{{selectedMember.fullName}}</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Name: {{selectedMember.fullName}}</p>
-                            <p>Gender: {{selectedMember.gender}}</p>
-                            <p>Height: {{selectedMember.height}}</p>
-                            <p>D.O.B: {{selectedMember.dob}}</p>
-                            <p>Years Active: {{selectedMember.active}}</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
+        <!-- Band Modal -->
+        <div id="band-modal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">{{selectedMember.fullName}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Name: {{selectedMember.fullName}}</p>
+                        <p>Gender: {{selectedMember.gender}}</p>
+                        <p>Height: {{selectedMember.height}}</p>
+                        <p>D.O.B: {{selectedMember.dob}}</p>
+                        <p>Years Active: {{selectedMember.active}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <div class="parallax"></div>
+    <div class="parallax"></div>
 
-        <!-- Discography Section -->
-        <div id="discography-location"></div>
-        <section data-ng-controller="albumController" id="discography-wrapper">
-            <div id="discography" class="container" data-ng-cloak>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h1 class="title">Discography</h1>
-                        <div id="loading">Loading...</div>
-                        <ul id="breadcrumbs" class="breadcrumb">
-                            <li data-ng-repeat="crumb in view.breadcrumbs" data-ng-class="$last ? 'active' : ''">
-                                <a data-ng-hide="$last" href="javascript:void(0)" data-ng-click="view.UpdateSelected(crumb.id)">{{crumb.title}}</a><span data-ng-show="$last">{{crumb.title}}</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Animate Container -->
-                <div class="animate-switch-container" data-ng-switch on="view.selectedNavigable.display">
-                    <!-- Albums View -->
-                    <div class="row animate-switch" data-ng-switch-default>
-                        <div class="col-sm-12">
-                            <!-- .fade .in.active -->
-                            <div id="discography-outer-wrapper">
-                                <div id="albums-inner-wrapper">
-                                    <div class="col-xs-6 col-sm-4" data-ng-repeat="(id, item) in view.navigables" data-ng-if="item.display == 'Studio Album'">
-                                        <div class="item-inner-wrapper">
-                                            <div class="cover" data-ng-click="view.UpdateSelected(id)"></div>
-                                            <img class="img-responsive" data-ng-src="{{item.data.imageURL}}" />
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Album View -->
-                    <div class="row animate-switch" data-ng-switch-when="Studio Album">
-                        <div class="col-xs-12 col-sm-6">
-                            <div class="row">
-                                <div class="col-xs-8">
-                                    <h2 class="title">{{selected.title || 'Album Name'}}</h2>
-                                </div>
-                                <div class="col-xs-4">
-                                    <h2 class="title text-right">{{selected.data.year || 'Year'}}</h2>
-                                </div>
-                            </div>
-                            <p class="title">{{selected.data.type || 'Type'}}</p>
-                            <p class="title">{{selected.data.edition || 'Edition'}}</p>
-
-                            <h3 class="title">Tracklist</h3>
-                            <table class="table table-hover">
-                                <tbody>
-                                    <tr data-ng-repeat="song in selected.children" data-ng-click="view.UpdateSelected(song.id)" class="cursor">
-                                        <td style="width:40px">{{$index + 1}}</td>
-                                        <td>{{song.title || song}}</td>
-                                        <td style="width:40px">{{song.data.duration}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="col-xs-12 col-sm-6">
-                            <img class="img-responsive" data-ng-src="{{selected.data.imageURL}}" />
-                        </div>
-                    </div>
-                    <!-- Song View -->
-                    <div class="row animate-switch" data-ng-switch-when="Song">
-                        <div class="col-xs-12 col-sm-6">
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-8">
-                                    <h2 class="title">{{selected.title || 'Song Name'}}</h2>
-                                </div>
-                                <div class="col-xs-12 col-sm-4">
-                                    <h2 class="title text-right">{{selected.data.duration || 'Duration'}}</h2>
-                                </div>
-                            </div>
-                            <p>{{selected.data.lyrics || 'Lyrics'}}</p>
-
-                        </div>
-                        <div class="col-xs-12 col-sm-6">
-                            <img class="img-responsive" data-ng-src="{{selected.data.imageURL || selected.parent.data.imageURL}}" />
-                        </div>
-                    </div>
+    <!-- Discography Section -->
+    <div id="discography-location"></div>
+    <section data-ng-controller="albumController" id="discography-wrapper">
+        <div id="discography" class="container" data-ng-cloak>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1 class="title">Discography</h1>
+                    <div id="loading">Loading...</div>
+                    <ul id="breadcrumbs" class="breadcrumb">
+                        <li data-ng-repeat="crumb in view.breadcrumbs" data-ng-class="$last ? 'active' : ''">
+                            <a data-ng-hide="$last" href="javascript:void(0)" data-ng-click="view.UpdateSelected(crumb.id)">{{crumb.title}}</a><span data-ng-show="$last">{{crumb.title}}</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </section>
-        <div class="parallax"></div>
-
-        <!-- About Section -->
-        <div id="about-location"></div>
-        <section id="about-wrapper">
-            <div class="container">
-                <div class="row">
+            <!-- Animate Container -->
+            <div class="animate-switch-container" data-ng-switch on="view.selectedNavigable.display">
+                <!-- Albums View -->
+                <div class="row animate-switch" data-ng-switch-default>
                     <div class="col-sm-12">
-                        <h1 class="title">About</h1>
-                        <h4 class="title">Quoted from Gorillaz Wiki (sorta)</h4>
-                        <p>Gorillaz-Unofficial is a online community focused on the virtual band Gorillaz and its collaborators.</p>
-                        <p>We feature news, history, interviews with people related to the project, a detailed discography, and biographies of the band, its members, creators and collaborators.</p>
-                        <p>We're known by people from Zombie Flesh Eaters, Passion Pictures and EMI. We've also been mentioned on Rise Of The Ogre.</p>
-                        <p>We were underatack from those stupid pirates looking for Murdoc in September 2014 which meant we had to go underground. However, as of December 30th 2015, we officially reactivated our broadcast of everything Gorillaz!</p>
-                        <h4 class="title">Recognition and statistics</h4>
-                        <p>
-                            Gorillaz-Unofficial.com has now been constantly updated since its launch in 2004 We have over tens of thousands of unique readers visiting the site each month now, and have received millions of visits since launch. We're lucky enough to count members of Zombie Flesh Eaters, Gorillaz' management, EMI, Passion Pictures and Gorillaz artistic teams amongst our regular visitors. Damon Albarn and Jamie Hewlett have both kindly granted interviews to the site in the past and have been very supportive.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <div class="parallax"></div>
-
-        <!-- Contact Section -->
-        <div id="contact-location"></div>
-        <section id="contact-wrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h1 class="title">Contact</h1>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-4">
-                        <div class="well">
-                            <form class="form-horizontal">
-                                <fieldset>
-                                    <legend>Message GU</legend>
-                                    <div class="form-group">
-                                        <label for="inputName" class="col-md-2 control-label">Name</label>
-                                        <div class="col-md-10">
-                                            <input type="text" class="form-control" id="inputName" placeholder="Your Name" required>
-                                        </div>
+                        <!-- .fade .in.active -->
+                        <div id="discography-outer-wrapper">
+                            <div id="albums-inner-wrapper">
+                                <div class="col-xs-6 col-sm-4" data-ng-repeat="(id, item) in view.navigables" data-ng-if="item.display == 'Studio Album'">
+                                    <div class="item-inner-wrapper">
+                                        <div class="cover" data-ng-click="view.UpdateSelected(id)"></div>
+                                        <img class="img-responsive" data-ng-src="{{item.data.imageURL}}" />
                                     </div>
+                                </div>
 
-                                    <div class="form-group">
-                                        <label for="inputEmail" class="col-md-2 control-label">Email</label>
-                                        <div class="col-md-10">
-                                            <input type="email" class="form-control" id="inputEmail" placeholder="Your Email" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="textArea" class="col-md-2 control-label">Message</label>
-                                        <div class="col-md-10">
-                                            <textarea class="form-control" rows="4" id="textArea" required></textarea>
-                                            <span class="help-block">Optional help text can go here, e.g. what this message should be used for?</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <legend>reCAPTCHA</legend>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-md-10 col-md-offset-2">
-                                            <button type="button" class="btn btn-default">Cancel</button>
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </form>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-4">
-                        <a class="twitter-timeline" data-dnt="true" data-theme="light" data-height="500" href="https://twitter.com/gorillaz_u">Tweets by gorillaz_u</a>
+                </div>
+                <!-- Album View -->
+                <div class="row animate-switch" data-ng-switch-when="Studio Album">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <h2 class="title">{{selected.title || 'Album Name'}}</h2>
+                            </div>
+                            <div class="col-xs-4">
+                                <h2 class="title text-right">{{selected.data.year || 'Year'}}</h2>
+                            </div>
+                        </div>
+                        <p class="title">{{selected.data.type || 'Type'}}</p>
+                        <p class="title">{{selected.data.edition || 'Edition'}}</p>
+
+                        <h3 class="title">Tracklist</h3>
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr data-ng-repeat="song in selected.children" data-ng-click="view.UpdateSelected(song.id)" class="cursor">
+                                    <td style="width:40px">{{$index + 1}}</td>
+                                    <td>{{song.title || song}}</td>
+                                    <td style="width:40px">{{song.data.duration}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-4">
-                        <a class="twitter-timeline" data-dnt="true" data-theme="light" data-height="500" href="https://twitter.com/gorillaz">Tweets by gorillaz</a>
+                    <div class="col-xs-12 col-sm-6">
+                        <img class="img-responsive" data-ng-src="{{selected.data.imageURL}}" />
+                    </div>
+                </div>
+                <!-- Song View -->
+                <div class="row animate-switch" data-ng-switch-when="Song">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-8">
+                                <h2 class="title">{{selected.title || 'Song Name'}}</h2>
+                            </div>
+                            <div class="col-xs-12 col-sm-4">
+                                <h2 class="title text-right">{{selected.data.duration || 'Duration'}}</h2>
+                            </div>
+                        </div>
+                        <p>{{selected.data.lyrics || 'Lyrics'}}</p>
+
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <img class="img-responsive" data-ng-src="{{selected.data.imageURL || selected.parent.data.imageURL}}" />
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+    <div class="parallax"></div>
 
-        <div class="parallax"></div>
-
-        <!-- Footer -->
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 text-center">
-                        <a href="javascript:void(0)" class="btn btn-sm btn-default">Copyright</a>
-                        <a href="javascript:void(0)" class="btn btn-sm btn-default">Disclaimer</a>
-                        <a href="javascript:void(0)" class="btn btn-sm btn-default">Credits</a>
-                    </div>
-                    <div class="col-xs-12">
-                        <h6 class="text-center">
-                            Gorillaz-Unofficial ©2004-2016 | Designed and built by <a href="http://michaelletcher.com" title="MichaelLetcher Web Design">MichaelLetcher Web Design</a>
-                        </h6>
-                    </div>
+    <!-- About Section -->
+    <div id="about-location"></div>
+    <section id="about-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="title">About</h1>
+                    <h4 class="title">Quoted from Gorillaz Wiki (sorta)</h4>
+                    <p>Gorillaz-Unofficial is a online community focused on the virtual band Gorillaz and its collaborators.</p>
+                    <p>We feature news, history, interviews with people related to the project, a detailed discography, and biographies of the band, its members, creators and collaborators.</p>
+                    <p>We're known by people from Zombie Flesh Eaters, Passion Pictures and EMI. We've also been mentioned on Rise Of The Ogre.</p>
+                    <p>We were underatack from those stupid pirates looking for Murdoc in September 2014 which meant we had to go underground. However, as of December 30th 2015, we officially reactivated our broadcast of everything Gorillaz!</p>
+                    <h4 class="title">Recognition and statistics</h4>
+                    <p>
+                        Gorillaz-Unofficial.com has now been constantly updated since its launch in 2004 We have over tens of thousands of unique readers visiting the site each month now, and have received millions of visits since launch. We're lucky enough to count members of Zombie Flesh Eaters, Gorillaz' management, EMI, Passion Pictures and Gorillaz artistic teams amongst our regular visitors. Damon Albarn and Jamie Hewlett have both kindly granted interviews to the site in the past and have been very supportive.
+                    </p>
                 </div>
             </div>
-        </footer>
+        </div>
+    </section>
 
-        
+    <div class="parallax"></div>
 
-        <!--<div class="wrapper">
-            <iframe src="http://www.livejournal.com/users/gorillaz_news#newssite"></iframe>
-        </div>-->
+    <!-- Contact Section -->
+    <div id="contact-location"></div>
+    <section id="contact-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="title">Contact</h1>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="well">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <legend>Message GU</legend>
+                                <div class="form-group">
+                                    <label for="inputName" class="col-md-2 control-label">Name</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" id="inputName" placeholder="Your Name" required>
+                                    </div>
+                                </div>
 
-        <script src="Scripts/jquery-3.1.1.min.js"></script>
+                                <div class="form-group">
+                                    <label for="inputEmail" class="col-md-2 control-label">Email</label>
+                                    <div class="col-md-10">
+                                        <input type="email" class="form-control" id="inputEmail" placeholder="Your Email" required>
+                                    </div>
+                                </div>
 
-        <!-- Bootstrap/Theme -->
-        <script src="Scripts/bootstrap.min.js"></script>
-        <script src="Scripts/material.min.js"></script>
-        <script src="Scripts/ripples.min.js"></script>
+                                <div class="form-group">
+                                    <label for="textArea" class="col-md-2 control-label">Message</label>
+                                    <div class="col-md-10">
+                                        <textarea class="form-control" rows="4" id="textArea" required></textarea>
+                                        <span class="help-block">Optional help text can go here, e.g. what this message should be used for?</span>
+                                    </div>
+                                </div>
 
-        <!-- Angular + Firebase -->
-        <script src="Scripts/angular.min.js"></script>
-        <script src="Scripts/angular-animate.min.js"></script>
-        <script src="Scripts/firebase.js"></script>
-        <script src="Scripts/angularfire.min.js"></script>
+                                <div class="form-group">
+                                    <legend>reCAPTCHA</legend>
+                                </div>
 
-        <script src="Scripts/app.js"></script>
-        <script src="Controllers/homeController.js"></script>
-        <script src="Controllers/bandController.js"></script>
-        <script src="Controllers/albumController.js"></script>
+                                <div class="form-group">
+                                    <div class="col-md-10 col-md-offset-2">
+                                        <button type="button" class="btn btn-default">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <a class="twitter-timeline" data-dnt="true" data-theme="light" data-height="500" href="https://twitter.com/gorillaz_u">Tweets by gorillaz_u</a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <a class="twitter-timeline" data-dnt="true" data-theme="light" data-height="500" href="https://twitter.com/gorillaz">Tweets by gorillaz</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <script src="Scripts/script.js"></script>
+    <div class="parallax"></div>
 
-        <!-- Twitter JS -->
-        <script>
-        window.twttr = (function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0],
-              t = window.twttr || {};
-            if (d.getElementById(id)) return t;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "https://platform.twitter.com/widgets.js";
-            fjs.parentNode.insertBefore(js, fjs);
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <a href="javascript:void(0)" class="btn btn-sm btn-default">Copyright</a>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-default">Disclaimer</a>
+                    <a href="javascript:void(0)" class="btn btn-sm btn-default">Credits</a>
+                </div>
+                <div class="col-xs-12">
+                    <h6 class="text-center">
+                        Gorillaz-Unofficial ©2004-2016 | Designed and built by <a href="http://michaelletcher.com" title="MichaelLetcher Web Design">MichaelLetcher Web Design</a>
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-            t._e = [];
-            t.ready = function (f) {
-                t._e.push(f);
-            };
+    <div class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
-            return t;
-        }(document, "script", "twitter-wjs"));
-        </script>
+    <!--<div class="wrapper">
+        <iframe src="http://www.livejournal.com/users/gorillaz_news#newssite"></iframe>
+    </div>-->
+
+    <script src="Scripts/jquery-3.1.1.min.js"></script>
+
+    <!-- Bootstrap/Theme -->
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/material.min.js"></script>
+    <script src="Scripts/ripples.min.js"></script>
+
+    <!-- Angular + Firebase -->
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-animate.min.js"></script>
+    <script src="Scripts/firebase.js"></script>
+    <script src="Scripts/angularfire.min.js"></script>
+
+    <script src="Scripts/app.js"></script>
+    <script src="Controllers/homeController.js"></script>
+    <script src="Controllers/bandController.js"></script>
+    <script src="Controllers/albumController.js"></script>
+
+    <script src="Scripts/script.js"></script>
+
+    <!-- Twitter JS -->
+    <script>
+    window.twttr = (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+
+        t._e = [];
+        t.ready = function (f) {
+            t._e.push(f);
+        };
+
+        return t;
+    }(document, "script", "twitter-wjs"));
+    </script>
 </body>
 </html>
