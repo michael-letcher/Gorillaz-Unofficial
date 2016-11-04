@@ -83,7 +83,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xs-12 col-sm-4 col-md-3 item-outer-wrapper" data-ng-repeat="member in members">
+                    <div class="col-xs-6 col-sm-4 col-md-3 item-outer-wrapper" data-ng-repeat="member in members">
                         <div class="item-inner-wrapper">
                             <h2 class="img-text">{{member.name}}</h2>
                             <div class="cover" data-ng-click="bandModal(member.id)" data-toggle="modal" data-target="#band-modal"></div>
@@ -123,7 +123,7 @@
         <section data-ng-controller="albumController" id="discography-wrapper">
             <div id="discography" class="container" data-ng-cloak>
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-xs-12">
                         <h1 class="title">Discography</h1>
                         <div id="loading">Loading...</div>
                         <ul id="breadcrumbs" class="breadcrumb">
@@ -141,7 +141,7 @@
                             <!-- .fade .in.active -->
                             <div id="discography-outer-wrapper">
                                 <div id="albums-inner-wrapper">
-                                    <div class="col-xs-12 col-sm-4" data-ng-repeat="(id, item) in view.navigables" data-ng-if="item.display == 'Studio Album'">
+                                    <div class="col-xs-6 col-sm-4" data-ng-repeat="(id, item) in view.navigables" data-ng-if="item.display == 'Studio Album'">
                                         <div class="item-inner-wrapper">
                                             <div class="cover" data-ng-click="view.UpdateSelected(id)"></div>
                                             <img class="img-responsive" data-ng-src="{{item.data.imageURL}}" />
@@ -156,10 +156,10 @@
                     <div class="row animate-switch" data-ng-switch-when="Studio Album">
                         <div class="col-xs-12 col-sm-6">
                             <div class="row">
-                                <div class="col-xs-12 col-sm-6">
+                                <div class="col-xs-8">
                                     <h2 class="title">{{selected.title || 'Album Name'}}</h2>
                                 </div>
-                                <div class="col-xs-12 col-sm-6">
+                                <div class="col-xs-4">
                                     <h2 class="title text-right">{{selected.data.year || 'Year'}}</h2>
                                 </div>
                             </div>
@@ -258,12 +258,12 @@
                                         <label for="textArea" class="col-md-2 control-label">Message</label>
                                         <div class="col-md-10">
                                             <textarea class="form-control" rows="4" id="textArea" required></textarea>
-                                            <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+                                            <span class="help-block">Optional help text can go here, e.g. what this message should be used for?</span>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <legend>CAPTCHA</legend>
+                                        <legend>reCAPTCHA</legend>
                                     </div>
 
                                     <div class="form-group">
@@ -305,6 +305,8 @@
                 </div>
             </div>
         </footer>
+
+        
 
         <!--<div class="wrapper">
             <iframe src="http://www.livejournal.com/users/gorillaz_news#newssite"></iframe>

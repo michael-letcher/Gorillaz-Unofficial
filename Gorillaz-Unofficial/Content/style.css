@@ -138,6 +138,7 @@ a, a:focus, a:hover {
     height: 100%;
     overflow: hidden;  
 }
+
 .albums-inner-wrapper {
     position: absolute;
     /*width: 50%;*/
@@ -158,14 +159,11 @@ a, a:focus, a:hover {
 /* https://docs.angularjs.org/api/ng/directive/ngSwitch */
 .animate-switch-container {
   position: relative;
-  min-height: 500px;
+  min-height: 600px;
   overflow: hidden;
 }
-.animate-switch {
-  padding:10px;
-}
 .animate-switch.ng-animate {
-  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  transition: all ease-in-out 0.5s;
   position: absolute;
   top: 0;
   left: 0;
@@ -174,11 +172,14 @@ a, a:focus, a:hover {
 }
 .animate-switch.ng-leave.ng-leave-active,
 .animate-switch.ng-enter {
-  top:-410px;
+  left:1170px;
 }
 .animate-switch.ng-leave,
 .animate-switch.ng-enter.ng-enter-active {
-  top:0;
+  left:0;
+}
+.animate-switch img {
+    margin: auto;
 }
 
 /* Item Style */
