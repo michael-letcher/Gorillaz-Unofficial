@@ -48,7 +48,7 @@ section:nth-of-type(odd) {
     background-size: cover;*/
 }
 
-/* Typography 
+/* Typography */
 a, a:focus, a:hover {
     color: red;
 }
