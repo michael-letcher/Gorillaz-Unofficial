@@ -144,7 +144,6 @@ a, a:focus, a:hover {
 }
 .breadcrumb {
     color: #333;
-    border-radius: unset;
 }
 #discography .btn-group a.btn {
     color: white;
@@ -185,25 +184,25 @@ a, a:focus, a:hover {
 /* Discography Animation */
 /* https://docs.angularjs.org/api/ng/directive/ngSwitch */
 .animate-switch-container {
-  position: relative;
-  min-height: 600px;
-  overflow: hidden;
+    position: relative;
+    min-height: 600px;
+    overflow: hidden;
 }
 .animate-switch.ng-animate {
-  transition: all ease-in-out 0.5s;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+    transition: all ease-in-out 0.5s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 .animate-switch.ng-leave.ng-leave-active,
 .animate-switch.ng-enter {
-  left:1170px;
+    left:1170px;
 }
 .animate-switch.ng-leave,
 .animate-switch.ng-enter.ng-enter-active {
-  left:0;
+    left:0;
 }
 .animate-switch img {
     margin: auto;
