@@ -6,8 +6,10 @@
 
         //filter input
         angular.forEach(input, function (c) {
-            if (c.display == type)
-                results.push(c);
+            if(c.data != null)
+                if (c.data.type == type) {
+                    results.push(c);
+                }
         });
         //sort input
         results.sort(function (a, b) {

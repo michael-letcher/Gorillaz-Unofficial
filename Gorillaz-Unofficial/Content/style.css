@@ -38,7 +38,7 @@ body {
         top: -60px;
     }
 }
-@media (min-width: 960px) {
+@media (max-width: 960px) {
     #band-location,
     #discography-location,
     #about-location,

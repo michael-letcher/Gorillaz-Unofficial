@@ -74,13 +74,14 @@ app.controller("albumController", function ($scope, $firebaseObject, $log) {
                 var lastID;
                 var lastNavObject = null;
                 // Create Navigable object
-                var rootObject = new Navigable("Studio Albums", "root");
+                var rootObject = new Navigable("Home", "root");
+                $scope.rootID = rootObject.id;
                 // Add root to view
                 this.AddNavigable(rootObject);
 
                 angular.forEach(data.albums, function (value, key) {
                     var itemName;
-
+                    //Set name, if value.name is specified
                     if (value.name != undefined) {
                         itemName = value.name;
                     } else {
@@ -88,16 +89,17 @@ app.controller("albumController", function ($scope, $firebaseObject, $log) {
                     }
 
                     // Create Navigable object
-                    var newAlbum = new Navigable(itemName, value.type);
+                    var newAlbum = new Navigable(itemName, value.display);
                     // Set data to new object
                     newAlbum.data = value;
+
                     // Add album to View
                     $scope.view.AddNavigable(newAlbum, rootObject);
 
                     // Set Songs
                     angular.forEach(newAlbum.data.songs, function (value, key) {
                         // Create Navigable object
-                        var newSong = new Navigable(key, 'Song');
+                        var newSong = new Navigable(key, value.type);
                         // Set data to new object
                         newSong.data = value;
                         // Set Song to View and Album
