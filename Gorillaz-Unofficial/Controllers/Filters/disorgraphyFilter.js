@@ -1,13 +1,21 @@
-﻿app.filter('typeFilter', function () {
-    return function (input, type) {
-        var i, c, txt = "";
-        for (i = 0; i < input.length; i++) {
-            c = x[i];
-            if (i % 2 == 0) {
-                c = c.toUpperCase();
-            }
-            txt += c;
-        }
-        return txt;
+﻿app.filter('typeSortFilter', function () {
+    return function (input, type, attribute) {
+        if (!angular.isObject(input)) return input;
+
+        var results = [];
+
+        //filter input
+        angular.forEach(input, function (c) {
+            if (c.display == type)
+                results.push(c);
+        });
+        //sort input
+        results.sort(function (a, b) {
+            a = parseInt(a.data[attribute]);
+            b = parseInt(b.data[attribute]);
+            return b - a;
+        });
+
+        return results;
     };
 });

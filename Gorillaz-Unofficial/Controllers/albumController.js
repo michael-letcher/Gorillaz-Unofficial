@@ -20,7 +20,9 @@ app.controller("albumController", function ($scope, $firebaseObject, $log) {
 
         console.log("$scope", $scope);
     });
-    //obj.$destroy();
+    
+    $scope.type = "Studio Album";
+
 
     /* Public UUID()
      * Parameters: NA
@@ -77,8 +79,16 @@ app.controller("albumController", function ($scope, $firebaseObject, $log) {
                 this.AddNavigable(rootObject);
 
                 angular.forEach(data.albums, function (value, key) {
+                    var itemName;
+
+                    if (value.name != undefined) {
+                        itemName = value.name;
+                    } else {
+                        itemName = key;
+                    }
+
                     // Create Navigable object
-                    var newAlbum = new Navigable(value.name, value.type);
+                    var newAlbum = new Navigable(itemName, value.type);
                     // Set data to new object
                     newAlbum.data = value;
                     // Add album to View
@@ -93,11 +103,10 @@ app.controller("albumController", function ($scope, $firebaseObject, $log) {
                         // Set Song to View and Album
                         $scope.view.AddNavigable(newSong, newAlbum);
                     });
-
                 });
                 
                 // Update tree
-                this.UpdateSelected(this.rootNavigable.id);
+                this.UpdateSelected(this.rootNavigable.id, false);
             }
         }
 
@@ -109,13 +118,17 @@ app.controller("albumController", function ($scope, $firebaseObject, $log) {
          * Parameters: NavigableID (Navigable ojbect ID)
          * Return: NA
          */
-        this.UpdateSelected = function (navigableID) {
+        this.UpdateSelected = function (navigableID, clicked) {
+            if(clicked)
+                window.location = '#discography-location';
+
+            //console.log("Move too", navigableID);
             var newSelection = this.navigables[navigableID];
 
             if (typeof newSelection != 'undefined') {
                 $scope.selected = this.selectedNavigable = newSelection;
                 this.UpdateBreadcrumbs();
-                console.log(this.selectedNavigable);
+                //console.log(this.selectedNavigable);
             }
         }
         
