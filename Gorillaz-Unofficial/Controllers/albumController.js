@@ -1,4 +1,4 @@
-﻿/* Created with assistence from Lyle Singleton */
+﻿/* Created with assistance from Lyle Singleton */
 
 app.controller("albumController", function ($scope, $firebaseObject, $log) {
     var fireRef = new Firebase("https://gorillaz-unofficial.firebaseio.com/");
